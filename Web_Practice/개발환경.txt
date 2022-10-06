@@ -1,0 +1,3 @@
+VS2022 
+ASP.NET Core 웹앱(Model-View-Controller)
+FramWork => .Net 5.0
