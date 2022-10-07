@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<h2>폼 데이터 전송</h2>
+<h3>HTML 태그로 구현</h3>
+
+@*<form action="/FormPostDemo/Index" method="post">
+    이름: <input type="text" id="name" name="name" value="" /><br />
+    내용: <input type="text" id="content" name="content" value="" /><br />
+
+    <input type="submit" value="전송"/>
+</form>*@
+<h3>헬퍼 메서드로 구현</h3>
+@using (Html.BeginForm())
+{
+    @Html.Label("이름: ")
+    @Html.TextBox("name")<br />
+    @Html.Label("내용: ")
+    @Html.TextBox("content")<br />
+
+    <input type="submit" value="전송"/>
+}
+<hr/>
+@*FormPostDemoController안에서 데이터 값이 ViewBag.Result안으로 들어감*@
+<p>@ViewBag.Result</p> 

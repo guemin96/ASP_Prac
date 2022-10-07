@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Web_Practice_2.Models.MaximModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강력한 형식의 뷰</title>
+</head>
+<body>
+    <h2>강력한 형식의 뷰</h2>
+    @using(Html.BeginForm())
+    {
+        @Html.LabelFor(n=>n.Name)
+        <text>: </text>
+        @Html.TextBoxFor(n=>n.Name, new{
+                                        type = "text",
+                                        placeholder ="길게 적으시오",
+                                        data_val_required = "이름을 입력하시오",
+                                        data_val_length_min = "1",
+                                        data_val_length_max = "25",
+                                        data_val_length ="이름은 1~25자를 쓰시오",
+                                        data_val = "true"
+
+        })<br/>
+
+        @Html.LabelFor(c=>c.Content)
+        <text>: </text>
+        @Html.TextBoxFor(c=>c.Content)
+        <input type="submit" value="전송"/>
+    }
+</body>
+</html>

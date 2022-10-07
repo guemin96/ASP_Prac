@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Web_Practice_2.Models.MaximModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TagHelper로 폼 구성하기</title>
+    <style>
+        .input-validation-error{
+            border :1px solid yellow;
+        }
+    </style>
+</head>
+<body>
+    <h2>TagHelper로 폼 구성 및 유효성검사</h2>
+    <form asp-controller="FormValidationDemo" 
+        asp-action="TagHelperValidation" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        
+        <label asp-for="Name"></label>:
+        <input asp-for="Name"/>
+        <span asp-validation-for="Name"></span>
+        <br/>
+
+        <label asp-for="Content"></label>:
+        <input asp-for="Content" />
+        <span asp-validation-for="Content"></span>
+        <br />
+
+        <input type="submit" value="전송"/>
+     </form>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation//dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+</body>
+</html>

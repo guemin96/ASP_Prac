@@ -50,7 +50,7 @@ namespace Web_Practice_2
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=About}/{id?}");
+                    pattern: "{controller=FormValidationDemo}/{action=TagHelperValidation}/{id?}");
             });
         }
     }

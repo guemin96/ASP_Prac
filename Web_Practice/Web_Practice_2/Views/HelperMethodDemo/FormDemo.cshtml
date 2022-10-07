@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+@{
+    Html.BeginForm();
+}
+<h3>폼1의 내용 들어오는 곳</h3>
+@{
+    Html.EndForm();
+}
+@using (Html.BeginForm())
+{
+    <h3>폼2의 내용 들어오는 곳</h3>
+}
