@@ -61,7 +61,7 @@ namespace Web_Project
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Shift}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

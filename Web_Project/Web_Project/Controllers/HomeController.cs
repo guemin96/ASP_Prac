@@ -18,10 +18,18 @@ namespace Web_Project.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Index(Date_test date_Test)
+        {
+            Console.Write(date_Test.Date);
+            return View();
+        }
+
 
         public IActionResult Privacy()
         {
