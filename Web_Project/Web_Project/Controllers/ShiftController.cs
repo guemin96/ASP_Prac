@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Web_Project.Models;
+using System.Linq;
 
 namespace Web_Project.Controllers {
     public class ShiftController : Controller {
@@ -169,44 +170,78 @@ namespace Web_Project.Controllers {
                 Ds.Tables[0].TableName = "ShiftTemplate";
                 Ds.Tables[1].TableName = "ShiftDate";
 
-                ds.Tables["ShiftTemplate"].Columns.Add("WeekDay");
-                ds.Tables["ShiftTemplate"].Columns.Add("MonDate");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_1_Mon");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_2_Mon");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_3_Mon");
-                ds.Tables["ShiftTemplate"].Columns.Add("ConfirmUser_Mon");
+                DataTable dt0 = ds.Tables[0];
+                DataTable dt1 = ds.Tables[1];
 
-                ds.Tables["ShiftTemplate"].Columns.Add("TueDate");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_1_Tue");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_2_Tue");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_3_Tue");
-                ds.Tables["ShiftTemplate"].Columns.Add("ConfirmUser_Tue");
+                //dt0에 columns 추가해주기
 
-                ds.Tables["ShiftTemplate"].Columns.Add("WedDate");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_1_Wed");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_2_Wed");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_3_Wed");
-                ds.Tables["ShiftTemplate"].Columns.Add("ConfirmUser_Wed");
+                foreach (DataRow item in dt0.Rows)
+                {
+                    
 
+                    //이중 foreach문 dt1 Linq 통해서 id값 뽑아내기
+                    // dt0.row[item["id"]][]
+                    foreach (DataRow item2 in dt1.Rows)
+                    {
 
-                ds.Tables["ShiftTemplate"].Columns.Add("ThrDate");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_1_Thr");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_2_Thr");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_3_Thr");
-                ds.Tables["ShiftTemplate"].Columns.Add("ConfirmUser_Thr");
+                    }
+
+                }
+                
 
 
-                ds.Tables["ShiftTemplate"].Columns.Add("FriDate");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_1_Fri");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_2_Fri");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_3_Fri");
-                ds.Tables["ShiftTemplate"].Columns.Add("ConfirmUser_Fri");
+                DataTable dt = new DataTable();
+                dt.Columns.Add("WeekDay");
 
-                ds.Tables["ShiftTemplate"].Columns.Add("SatDate");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_1_Sat");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_2_Sat");
-                ds.Tables["ShiftTemplate"].Columns.Add("Input_3_Sat");
-                ds.Tables["ShiftTemplate"].Columns.Add("ConfirmUser_Sat");
+
+                dt.Columns.Add("MonDate");
+                dt.Columns.Add("Input_1_Mon");
+                dt.Columns.Add("Input_2_Mon");
+                dt.Columns.Add("Input_3_Mon");
+                dt.Columns.Add("ConfirmUser_Mon");
+
+                dt.Columns.Add("TueDate");
+                dt.Columns.Add("Input_1_Tue");
+                dt.Columns.Add("Input_2_Tue");
+                dt.Columns.Add("Input_3_Tue");
+                dt.Columns.Add("ConfirmUser_Tue");
+
+                dt.Columns.Add("WedDate");
+                dt.Columns.Add("Input_1_Wed");
+                dt.Columns.Add("Input_2_Wed");
+                dt.Columns.Add("Input_3_Wed");
+                dt.Columns.Add("ConfirmUser_Wed");
+
+
+                dt.Columns.Add("ThrDate");
+                dt.Columns.Add("Input_1_Thr");
+                dt.Columns.Add("Input_2_Thr");
+                dt.Columns.Add("Input_3_Thr");
+                dt.Columns.Add("ConfirmUser_Thr");
+
+
+                dt.Columns.Add("FriDate");
+                dt.Columns.Add("Input_1_Fri");
+                dt.Columns.Add("Input_2_Fri");
+                dt.Columns.Add("Input_3_Fri");
+                dt.Columns.Add("ConfirmUser_Fri");
+
+                dt.Columns.Add("SatDate");
+                dt.Columns.Add("Input_1_Sat");
+                dt.Columns.Add("Input_2_Sat");
+                dt.Columns.Add("Input_3_Sat");
+                dt.Columns.Add("ConfirmUser_Sat");
+
+                foreach (DataRow item in ds.Tables[0].Rows)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr.ItemArray.Append(item);
+                    
+
+
+                }
+
+
 
 
                 return View();
