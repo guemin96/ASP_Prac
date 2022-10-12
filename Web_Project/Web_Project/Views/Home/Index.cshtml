@@ -20,7 +20,7 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <form asp-controller="Home" asp-action="Index" method="post">
-        <input type="text" id="datepicker" name="Date" />
+        <input type="text" id="datepicker" name="Date" autocomplete="off" disabled readonly/>
         <input type="submit" value="조회" />  
     </form>
     
@@ -29,21 +29,23 @@
     <script>
         var picker = new Pikaday({
         field: document.getElementById('datepicker'),
-        format: 'D/M/YYYY',
+        format: 'YYYY/MM/DD',
         toString(date, format) {
             // you should do formatting based on the passed format,
             // but we will just return 'D/M/YYYY' for simplicity
-            const day = date.getDate();
-            const month = date.getMonth() + 1;
             const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+
+            const day = date.getDate();
             return `${year}/${month}/${day}`;
         },
         parse(dateString, format) {
             // dateString is the result of `toString` method
             const parts = dateString.split('/');
-            const day = parseInt(parts[0], 10);
+            const year = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
-            const year = parseInt(parts[2], 10);
+            const day = parseInt(parts[2], 10);
+
             return new Date(year, month, day);
         }
     });

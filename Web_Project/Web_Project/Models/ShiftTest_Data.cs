@@ -1,8 +1,9 @@
 ﻿namespace Web_Project.Models {
     public class ShiftTest_Data {
         public int ItemSeq { get; set; }
-        public string CheckBody { get; set; }
+        public string Week_Date { get; set; }
 
+        public string CheckBody { get; set; }
         public string CheckNM { get; set; }
 
         public string Date_Mon { get; set; }
