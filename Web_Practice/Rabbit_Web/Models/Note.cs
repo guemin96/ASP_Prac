@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rabbit_Web.Models {
     public class Note 
@@ -25,5 +26,8 @@ namespace Rabbit_Web.Models {
         [Required]
         public int UserNo { get; set; } //작성자
 
+        //UserNo를 통해서 UserName을 가지고 오기 위해서(Join과 같은 역할)
+        [ForeignKey("UserNo")]  
+        public virtual User User { get; set; }
     }
 }
