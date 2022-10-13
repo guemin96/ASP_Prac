@@ -1,0 +1,22 @@
+﻿@* cshtml : html안에 c# 코드를 넣을수 있게 만든 페이지  *@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>
+    StudyController - Index 페이지
+</h1>
+
+@{
+    var name = "박규민";
+    var num = 10;
+}
+<h3>@name 님 환영합니다.</h3>
+
+@if(num==10)
+{
+    <h2>@name 님은 @num 살입니다.</h2>
+}
+else
+{
+    <h2>나이를 알 수 없습니다.</h2>
+}

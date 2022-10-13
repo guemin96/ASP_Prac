@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using Rabbit_Web.Models
+@model User
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h2> 사용자 번호 : @Model.UserNo</h2>
+    <h2> 사용자 이름 : @Model.UserName</h2>
+    <h2> viewBag 사용자 번호 : @ViewBag.User2.UserNo</h2>
+    <h2> viewBag 사용자 이름 : @ViewBag.User2.UserName</h2>
+    <h2> viewData 사용자 번호 : @ViewData["UserNo"]</h2>
+    <h2> viewData 사용자 이름 : @ViewData["UserName"]</h2>
+
+</div>
