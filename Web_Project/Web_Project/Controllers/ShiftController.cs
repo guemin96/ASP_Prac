@@ -44,9 +44,9 @@ namespace Web_Project.Controllers {
                     sd.Mon_Input_3 = item["Input_3_Mon"].ToString();
 
                     sd.Date_Tues = item["Date_Tues"].ToString();
-                    sd.Tues_Input_1 = item["Input_1_Tues"].ToString();
-                    sd.Tues_Input_2 = item["Input_2_Tues"].ToString();
-                    sd.Tues_Input_3 = item["Input_3_Tues"].ToString();
+                    sd.Tue_Input_1 = item["Input_1_Tues"].ToString();
+                    sd.Tue_Input_2 = item["Input_2_Tues"].ToString();
+                    sd.Tue_Input_3 = item["Input_3_Tues"].ToString();
                     
                     sd.Date_Wed = item["Date_Wed"].ToString();
                     sd.Wed_Input_1 = item["Input_1_Wed"].ToString();
@@ -54,9 +54,9 @@ namespace Web_Project.Controllers {
                     sd.Wed_Input_3 = item["Input_3_Wed"].ToString();
                     
                     sd.Date_Thur = item["Date_Thur"].ToString();
-                    sd.Thur_Input_1 = item["Input_1_Thur"].ToString();
-                    sd.Thur_Input_2 = item["Input_2_Thur"].ToString();
-                    sd.Thur_Input_3 = item["Input_3_Thur"].ToString();
+                    sd.Thr_Input_1 = item["Input_1_Thur"].ToString();
+                    sd.Thr_Input_2 = item["Input_2_Thur"].ToString();
+                    sd.Thr_Input_3 = item["Input_3_Thur"].ToString();
                     
                     sd.Date_Fri = item["Date_Fri"].ToString();
                     sd.Fri_Input_1 = item["Input_1_Fri"].ToString();
@@ -75,7 +75,7 @@ namespace Web_Project.Controllers {
             return View(SDL);
         }
         [HttpPost]
-        public IActionResult Index_test(Date_test dt) {
+        public IActionResult Index_test(SelectDate dt) {
             DataSet ds = new DataSet();
             string strConn = "server=192.168.253.14;database=dbMobile;UID=sa;Pwd=gk; Timeout=60";
             List<ShiftTest_Data> SDL = new List<ShiftTest_Data>();
@@ -114,9 +114,9 @@ namespace Web_Project.Controllers {
                     sd.Mon_Input_3 = item["Input_3_Mon"].ToString();
 
                     sd.Date_Tues = item["Date_Tues"].ToString();
-                    sd.Tues_Input_1 = item["Input_1_Tues"].ToString();
-                    sd.Tues_Input_2 = item["Input_2_Tues"].ToString();
-                    sd.Tues_Input_3 = item["Input_3_Tues"].ToString();
+                    sd.Tue_Input_1 = item["Input_1_Tues"].ToString();
+                    sd.Tue_Input_2 = item["Input_2_Tues"].ToString();
+                    sd.Tue_Input_3 = item["Input_3_Tues"].ToString();
 
                     sd.Date_Wed = item["Date_Wed"].ToString();
                     sd.Wed_Input_1 = item["Input_1_Wed"].ToString();
@@ -124,9 +124,9 @@ namespace Web_Project.Controllers {
                     sd.Wed_Input_3 = item["Input_3_Wed"].ToString();
 
                     sd.Date_Thur = item["Date_Thur"].ToString();
-                    sd.Thur_Input_1 = item["Input_1_Thur"].ToString();
-                    sd.Thur_Input_2 = item["Input_2_Thur"].ToString();
-                    sd.Thur_Input_3 = item["Input_3_Thur"].ToString();
+                    sd.Thr_Input_1 = item["Input_1_Thur"].ToString();
+                    sd.Thr_Input_2 = item["Input_2_Thur"].ToString();
+                    sd.Thr_Input_3 = item["Input_3_Thur"].ToString();
 
                     sd.Date_Fri = item["Date_Fri"].ToString();
                     sd.Fri_Input_1 = item["Input_1_Fri"].ToString();
@@ -146,13 +146,125 @@ namespace Web_Project.Controllers {
             }
         }
 
+        public void DataList(DataTable dt0, DataTable dt1) {
+            foreach (DataRow item in dt0.Rows) {
+                int num = Int32.Parse(item[1].ToString());
+                DataTable data_Detail = dt1.Select($"ItemSeq='{num}'").CopyToDataTable();
+
+
+                //이중 foreach문 dt1 Linq 통해서 id값 뽑아내기
+                // dt0.row[item["id"]][]
+                foreach (DataRow item2 in data_Detail.Rows) {
+                    if (item2[2].ToString() == "월") {
+
+                        //dt0.Rows[num - 1]["Date_Mon"] = item2[1].ToString();
+                        dt0.Rows[num - 1]["Mon_Input_1"] = item2[5].ToString();
+                        dt0.Rows[num - 1]["Mon_Input_2"] = item2[6].ToString();
+                        dt0.Rows[num - 1]["Mon_Input_3"] = item2[7].ToString();
+                        dt0.Rows[num - 1]["Mon_ConfirmUser"] = item2[8].ToString();
+                    }
+                    else if (item2[2].ToString() == "화") {
+                        //dt0.Rows[num - 1]["Date_Tue"] = item2[1].ToString();
+                        dt0.Rows[num - 1]["Tue_Input_1"] = item2[5].ToString();
+                        dt0.Rows[num - 1]["Tue_Input_2"] = item2[6].ToString();
+                        dt0.Rows[num - 1]["Tue_Input_3"] = item2[7].ToString();
+                        dt0.Rows[num - 1]["Tue_ConfirmUser"] = item2[8].ToString();
+                    }
+                    else if (item2[2].ToString() == "수") {
+                        //dt0.Rows[num - 1]["Date_Wed"] = item2[1].ToString();
+                        dt0.Rows[num - 1]["Wed_Input_1"] = item2[5].ToString();
+                        dt0.Rows[num - 1]["Wed_Input_2"] = item2[6].ToString();
+                        dt0.Rows[num - 1]["Wed_Input_3"] = item2[7].ToString();
+                        dt0.Rows[num - 1]["Wed_ConfirmUser"] = item2[8].ToString();
+                    }
+                    else if (item2[2].ToString() == "목") {
+                        //dt0.Rows[num - 1]["Date_Thr"] = item2[1].ToString();
+                        dt0.Rows[num - 1]["Thr_Input_1"] = item2[5].ToString();
+                        dt0.Rows[num - 1]["Thr_Input_2"] = item2[6].ToString();
+                        dt0.Rows[num - 1]["Thr_Input_3"] = item2[7].ToString();
+                        dt0.Rows[num - 1]["Thr_ConfirmUser"] = item2[8].ToString();
+                    }
+                    else if (item2[2].ToString() == "금") {
+                        //dt0.Rows[num - 1]["Date_Fri"] = item2[1].ToString();
+                        dt0.Rows[num - 1]["Fri_Input_1"] = item2[5].ToString();
+                        dt0.Rows[num - 1]["Fri_Input_2"] = item2[6].ToString();
+                        dt0.Rows[num - 1]["Fri_Input_3"] = item2[7].ToString();
+                        dt0.Rows[num - 1]["Fri_ConfirmUser"] = item2[8].ToString();
+                    }
+                    else if (item2[2].ToString() == "토") {
+                        //dt0.Rows[num - 1]["Date_Sat"] = item2[1].ToString();
+                        dt0.Rows[num - 1]["Sat_Input_1"] = item2[5].ToString();
+                        dt0.Rows[num - 1]["Sat_Input_2"] = item2[6].ToString();
+                        dt0.Rows[num - 1]["Sat_Input_3"] = item2[7].ToString();
+                        dt0.Rows[num - 1]["Sat_ConfirmUser"] = item2[8].ToString();
+                    }
+                }
+            }
+        }
+        public void DataList2(List<ShiftCheckTotalMember> SCTM, DataTable dt0) {
+            foreach (DataRow item in dt0.Rows) {
+                ShiftCheckTotalMember STM = new ShiftCheckTotalMember();
+                STM.TemplateID = Int32.Parse(item["TemplateID"].ToString());
+                STM.ItemSeq = Int32.Parse(item["ItemSeq"].ToString());
+                STM.RoomID = Int32.Parse(item["RoomID"].ToString());
+                STM.CheckTypeID = Int32.Parse(item["CheckTypeID"].ToString());
+                STM.CheckNM = item["CheckNM"].ToString();
+                STM.CheckBody = item["CheckBody"].ToString();
+                STM.OrderBy = Int32.Parse(item["OrderBy"].ToString());
+                STM.UseYN = item["UseYN"].ToString();
+                STM.Date_Mon = item["Date_Mon"].ToString();
+                STM.Mon_Input_1 = item["Mon_Input_1"].ToString();
+                STM.Mon_Input_2 = item["Mon_Input_2"].ToString();
+                STM.Mon_Input_3 = item["Mon_Input_3"].ToString();
+                STM.Mon_ConfirmUser = item["Mon_ConfirmUser"].ToString();
+
+                STM.Date_Tue = item["Date_Tue"].ToString();
+                STM.Tue_Input_1 = item["Tue_Input_1"].ToString();
+                STM.Tue_Input_2 = item["Tue_Input_2"].ToString();
+                STM.Tue_Input_3 = item["Tue_Input_3"].ToString();
+                STM.Tue_ConfirmUser = item["Tue_ConfirmUser"].ToString();
+
+
+                STM.Date_Wed = item["Date_Wed"].ToString();
+                STM.Wed_Input_1 = item["Wed_Input_1"].ToString();
+                STM.Wed_Input_2 = item["Wed_Input_2"].ToString();
+                STM.Wed_Input_3 = item["Wed_Input_3"].ToString();
+                STM.Wed_ConfirmUser = item["Wed_ConfirmUser"].ToString();
+
+                STM.Date_Thr = item["Date_Thr"].ToString();
+                STM.Thr_Input_1 = item["Thr_Input_1"].ToString();
+                STM.Thr_Input_2 = item["Thr_Input_2"].ToString();
+                STM.Thr_Input_3 = item["Thr_Input_3"].ToString();
+                STM.Thr_ConfirmUser = item["Thr_ConfirmUser"].ToString();
+
+
+                STM.Date_Fri = item["Date_Fri"].ToString();
+                STM.Fri_Input_1 = item["Fri_Input_1"].ToString();
+                STM.Fri_Input_2 = item["Fri_Input_2"].ToString();
+                STM.Fri_Input_3 = item["Fri_Input_3"].ToString();
+                STM.Fri_ConfirmUser = item["Fri_ConfirmUser"].ToString();
+
+
+                STM.Date_Sat = item["Date_Sat"].ToString();
+                STM.Sat_Input_1 = item["Sat_Input_1"].ToString();
+                STM.Sat_Input_2 = item["Sat_Input_2"].ToString();
+                STM.Sat_Input_3 = item["Sat_Input_3"].ToString();
+                STM.Sat_ConfirmUser = item["Sat_ConfirmUser"].ToString();
+
+
+                SCTM.Add(STM);
+
+            }
+        }
         [HttpGet]
         public IActionResult Index() {
 
-            DataSet ds = new DataSet();
             string strConn = "server=192.168.253.14;database=dbMobile;UID=sa;Pwd=gk; Timeout=60";
 
             string TodayDate = DateTime.Now.ToString("yyyyMMdd");
+
+            List<ShiftCheckTotalMember> SCTM = new List<ShiftCheckTotalMember>();
+
 
             using (SqlConnection conn = new SqlConnection(strConn)) {
                 if (conn.State == ConnectionState.Closed) {
@@ -170,89 +282,47 @@ namespace Web_Project.Controllers {
                 Ds.Tables[0].TableName = "ShiftTemplate";
                 Ds.Tables[1].TableName = "ShiftDate";
 
-                DataTable dt0 = ds.Tables[0];
-                DataTable dt1 = ds.Tables[1];
-
-                //dt0에 columns 추가해주기
-
-                foreach (DataRow item in dt0.Rows)
-                {
-                    
-
-                    //이중 foreach문 dt1 Linq 통해서 id값 뽑아내기
-                    // dt0.row[item["id"]][]
-                    foreach (DataRow item2 in dt1.Rows)
-                    {
-
-                    }
-
-                }
+                DataTable dt0 = Ds.Tables[0];
+                DataTable dt1 = Ds.Tables[1];
                 
-
-
-                DataTable dt = new DataTable();
-                dt.Columns.Add("WeekDay");
-
-
-                dt.Columns.Add("MonDate");
-                dt.Columns.Add("Input_1_Mon");
-                dt.Columns.Add("Input_2_Mon");
-                dt.Columns.Add("Input_3_Mon");
-                dt.Columns.Add("ConfirmUser_Mon");
-
-                dt.Columns.Add("TueDate");
-                dt.Columns.Add("Input_1_Tue");
-                dt.Columns.Add("Input_2_Tue");
-                dt.Columns.Add("Input_3_Tue");
-                dt.Columns.Add("ConfirmUser_Tue");
-
-                dt.Columns.Add("WedDate");
-                dt.Columns.Add("Input_1_Wed");
-                dt.Columns.Add("Input_2_Wed");
-                dt.Columns.Add("Input_3_Wed");
-                dt.Columns.Add("ConfirmUser_Wed");
-
-
-                dt.Columns.Add("ThrDate");
-                dt.Columns.Add("Input_1_Thr");
-                dt.Columns.Add("Input_2_Thr");
-                dt.Columns.Add("Input_3_Thr");
-                dt.Columns.Add("ConfirmUser_Thr");
-
-
-                dt.Columns.Add("FriDate");
-                dt.Columns.Add("Input_1_Fri");
-                dt.Columns.Add("Input_2_Fri");
-                dt.Columns.Add("Input_3_Fri");
-                dt.Columns.Add("ConfirmUser_Fri");
-
-                dt.Columns.Add("SatDate");
-                dt.Columns.Add("Input_1_Sat");
-                dt.Columns.Add("Input_2_Sat");
-                dt.Columns.Add("Input_3_Sat");
-                dt.Columns.Add("ConfirmUser_Sat");
-
-                foreach (DataRow item in ds.Tables[0].Rows)
-                {
-                    DataRow dr = dt.NewRow();
-                    dr.ItemArray.Append(item);
-                    
-
-
-                }
-
-
-
-
-                return View();
+                DataList(dt0, dt1);
+                DataList2(SCTM, dt0);
+                return View(SCTM);
             }
         }
         [HttpPost]
-        public IActionResult Index(Date_test dt) {
+        public IActionResult Index(SelectDate SD) {
 
-            return View();
+            string strConn = "server=192.168.253.14;database=dbMobile;UID=sa;Pwd=gk; Timeout=60";
+
+            string DateConvert = DateTime.Parse(SD.Date).ToString("yyyyMMdd");
+
+            List<ShiftCheckTotalMember> SCTM = new List<ShiftCheckTotalMember>();
+
+
+            using (SqlConnection conn = new SqlConnection(strConn)) {
+                if (conn.State == ConnectionState.Closed) {
+                    conn.Open();
+                }
+                SqlCommand cmd = new SqlCommand("UP_ShiftCheck_Select_Web_test", conn);
+                cmd.CommandTimeout = 3000;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@SelectDate", SqlDbType.VarChar).Value = DateConvert;
+
+                DataSet Ds = new DataSet();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(Ds);
+                Ds.Tables[0].TableName = "ShiftTemplate";
+                Ds.Tables[1].TableName = "ShiftDate";
+
+                DataTable dt0 = Ds.Tables[0];
+                DataTable dt1 = Ds.Tables[1];
+
+                DataList(dt0, dt1);
+                DataList2(SCTM, dt0);
+                return View(SCTM);
+            }
         }
-
-
     }
 }

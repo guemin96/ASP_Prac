@@ -24,7 +24,7 @@ namespace Web_Project.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(Date_test date_Test)
+        public IActionResult Index(SelectDate date_Test)
         {
             Console.Write(date_Test.Date);
             return View();

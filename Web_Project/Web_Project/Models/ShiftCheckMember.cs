@@ -23,9 +23,9 @@ namespace Web_Project.Models {
 
         public string Date_Tues { get; set; }
 
-        public string Tues_Input_1 { get; set; }
-        public string Tues_Input_2 { get; set; }
-        public string Tues_Input_3 { get; set; }
+        public string Tue_Input_1 { get; set; }
+        public string Tue_Input_2 { get; set; }
+        public string Tue_Input_3 { get; set; }
 
         public string Date_Wed { get; set; }
 
@@ -35,9 +35,9 @@ namespace Web_Project.Models {
 
         public string Date_Thur { get; set; }
 
-        public string Thur_Input_1 { get; set; }
-        public string Thur_Input_2 { get; set; }
-        public string Thur_Input_3 { get; set; }
+        public string Thr_Input_1 { get; set; }
+        public string Thr_Input_2 { get; set; }
+        public string Thr_Input_3 { get; set; }
 
         public string Date_Fri { get; set; }
 

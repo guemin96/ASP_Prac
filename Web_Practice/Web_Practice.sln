@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web_Practice_2", "Web_Pract
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web_Practice_3", "Web_Practice_3\Web_Practice_3.csproj", "{8FBB4625-9124-4434-9C5E-545056A18E65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rabbit_Web", "Rabbit_Web\Rabbit_Web.csproj", "{FAA99B0F-796E-431A-8759-C9CD3EA43AD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8FBB4625-9124-4434-9C5E-545056A18E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FBB4625-9124-4434-9C5E-545056A18E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FBB4625-9124-4434-9C5E-545056A18E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA99B0F-796E-431A-8759-C9CD3EA43AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA99B0F-796E-431A-8759-C9CD3EA43AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA99B0F-796E-431A-8759-C9CD3EA43AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA99B0F-796E-431A-8759-C9CD3EA43AD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
