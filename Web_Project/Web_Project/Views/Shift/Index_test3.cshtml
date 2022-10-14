@@ -9,10 +9,6 @@
     var dtDate = ViewBag.dtDate as DataTable;
     List<int> Chk1_F = new List<int> { 1, 10, 18, 25, 35, 39 };
 
-    const int ItemSeqNum = 1;
-    const int Input_1_Num = 7;
-    const int Input_2_Num = 8;
-    const int Input_3_Num = 9;
 }
 
 <!DOCTYPE html>
@@ -86,57 +82,48 @@
                     <th>@DateTime.ParseExact( @item["Date"].ToString(),"yyyyMMdd",null).ToShortDateString() </th>
                 }  
             </tr>
-            <tr>
-                @{
-                      DataRow[] ConfirmUser = dtReal.Select($"ItemSeq=1");
-                }
-                @foreach (DataRow item in ConfirmUser) {
-                    <th>@item[10]</th>
-                }
-            </tr>
             
         </thead>
         <tbody>
-            @foreach (DataRow TempDr in dtTemp.Rows) {
-                if (TempDr["CheckTypeID"].ToString().Equals("4")) {
+            @foreach (DataRow item in dtTemp.Rows) {
+                if (item["CheckTypeID"].ToString() == "4") {
                     <tr>
                         @{
-                            DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
+                            var DataList = dtReal.AsEnumerable().Where(x => x.Field<Int64>("ItemSeq").ToString() == item[1].ToString()).CopyToDataTable();
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
-                        @foreach (var DL in DataList) {
+                        <th class="TitleBody">@item["ItemSeq"]</th>
+                        <th class="TitleBody">@item["CheckBody"]</th>
+                        @for (int i = 0; i < 7; i++) {
                             <th style="font-size:12px">
-                                @DL[Input_1_Num]'℃
+                                @DataList.Rows[i][7]'℃
                                 /
-                                @DL[Input_2_Num]%
+                                @DataList.Rows[i][8]%
                             </th>
                         }
                     </tr>
                 }
-                else if (TempDr["CheckTypeID"].ToString().Equals("3")) {
+                else if (item["CheckTypeID"].ToString() == "3") {
                     <tr>
                         @{
-                            DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
-
+                            var DataList = dtReal.AsEnumerable().Where(x => x.Field<Int64>("ItemSeq").ToString() == item[1].ToString()).CopyToDataTable();
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
-                        @foreach (var DL in DataList) {
+                        <th class="TitleBody">@item["ItemSeq"]</th>
+                        <th class="TitleBody">@item["CheckBody"]</th>
+                        @for (int i = 0; i < 7; i++) {
                             <th>
-                                @if (DL[Input_1_Num].Equals("True")) {
+                                @if (DataList.Rows[i][7].Equals("True")) {
                                     <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
                                 }
                                 else {
                                     <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
                                 }
-                                @if (DL[Input_2_Num].Equals("True")) {
+                                @if (DataList.Rows[i][8].Equals("True")) {
                                     <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
                                 }
                                 else {
                                     <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
                                 }
-                                @if (DL[Input_3_Num].Equals("True")) {
+                                @if (DataList.Rows[i][9].Equals("True")) {
                                     <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
                                 }
                                 else {
@@ -145,26 +132,24 @@
 
                             </th>
                         }
-                       
                     </tr>
                 }
-                else if (TempDr["CheckTypeID"].ToString().Equals("2")) {
+                else if (item["CheckTypeID"].ToString() == "2") {
                     <tr>
                         @{
-                            DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
-
+                            var DataList = dtReal.AsEnumerable().Where(x => x.Field<Int64>("ItemSeq").ToString() == item[1].ToString()).CopyToDataTable();
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
-                        @foreach (var DL in DataList) {
+                        <th class="TitleBody">@item["ItemSeq"]</th>
+                        <th class="TitleBody">@item["CheckBody"]</th>
+                        @for (int i = 0; i < 7; i++) {
                             <th>
-                                @if (DL[Input_1_Num].Equals("True")) {
+                                @if (DataList.Rows[i][7].Equals("True")) {
                                     <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
                                 }
                                 else {
                                     <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
                                 }
-                                @if (DL[Input_2_Num].Equals("True")) {
+                                @if (DataList.Rows[i][8].Equals("True")) {
                                     <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
                                 }
                                 else {
@@ -172,38 +157,36 @@
                                 }
                             </th>
                         }
-                       
                     </tr>
                 }
-                else if (Chk1_F.Contains(Int32.Parse(TempDr[1].ToString()))) {
+                else if (Chk1_F.Contains(Int32.Parse(item[1].ToString()))) {
                     <tr>
                         @{
-                            DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
-
+                            var DataList = dtReal.AsEnumerable().Where(x => x.Field<Int64>("ItemSeq").ToString() == item[1].ToString()).CopyToDataTable();
                         }
-                        @if (TempDr[ItemSeqNum].ToString().Equals("1")) {
+                        @if (item[1].ToString() == "1") {
                             <th  rowspan="9">기본</th>
                         }
-                        else if (TempDr[ItemSeqNum].ToString().Equals("10")) {
+                        else if (item[1].ToString() == "10") {
                             <th rowspan="8">1번랙</th>
                         }
-                        else if (TempDr[ItemSeqNum].ToString().Equals("18")) {
+                        else if (item[1].ToString() == "18") {
                             <th rowspan="7">2번랙</th>
                         }
-                        else if (TempDr[ItemSeqNum].ToString().Equals("25")) {
+                        else if (item[1].ToString() == "25") {
                             <th rowspan="10">통신랙</th>
                         }
-                        else if (TempDr[ItemSeqNum].ToString().Equals("35")) {
+                        else if (item[1].ToString() == "35") {
                             <th rowspan="4">3번랙</th>
                         }
-                        else if (TempDr[ItemSeqNum].ToString().Equals("39")) {
+                        else if (item[1].ToString() == "39") {
                             <th rowspan="6">메탈랙</th>
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
-                        @foreach (var DL in DataList) {
+                        <th class="TitleBody">@item["ItemSeq"]</th>
+                        <th class="TitleBody">@item["CheckBody"]</th>
+                        @for (int i = 0; i < 7; i++) {
                             <th>
-                                @if (DL[Input_1_Num].Equals("True")) {
+                                @if (DataList.Rows[i][7].Equals("True")) {
                                     <input type="checkbox" name="checkbox" checked readonly onclick="return false" />
                                 }
                                 else {
@@ -211,20 +194,18 @@
                                 }
                             </th>
                         }
-                       
                     </tr>
                 }
                 else {
                     <tr>
                         @{
-                            DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
-
+                            var DataList = dtReal.AsEnumerable().Where(x => x.Field<Int64>("ItemSeq").ToString() == item[1].ToString()).CopyToDataTable();
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
-                        @foreach (var DL in DataList) {
+                        <th class="TitleBody">@item["ItemSeq"]</th>
+                        <th class="TitleBody">@item["CheckBody"]</th>
+                        @for (int i = 0; i < 7; i++) {
                             <th>
-                                @if (DL[Input_1_Num].Equals("True")) {
+                                @if (DataList.Rows[i][7].Equals("True")) {
                                     <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
                                 }
                                 else {

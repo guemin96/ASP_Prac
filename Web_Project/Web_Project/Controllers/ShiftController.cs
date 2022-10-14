@@ -8,6 +8,60 @@ using System.Linq;
 
 namespace Web_Project.Controllers {
     public class ShiftController : Controller {
+
+        [HttpGet]
+        public IActionResult Index(string date) {
+
+            string strConn = "server=192.168.253.14;database=dbMobile;UID=sa;Pwd=gk; Timeout=60";
+            string SelectDT = null;
+            if (date== null) {
+                SelectDT = DateTime.Now.ToString("yyyyMMdd");
+            }
+            else {
+                SelectDT= DateTime.Parse(date).ToString("yyyyMMdd");
+            }
+
+            List<ShiftCheckTotalMember> SCTM = new List<ShiftCheckTotalMember>();
+
+
+            using (SqlConnection conn = new SqlConnection(strConn)) {
+                if (conn.State == ConnectionState.Closed) {
+                    conn.Open();
+                }
+                SqlCommand cmd = new SqlCommand("UP_ShiftCheck_Select_Web", conn);
+                cmd.CommandTimeout = 3000;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@SelectDate", SqlDbType.VarChar).Value = SelectDT;
+
+                DataSet Ds = new DataSet();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(Ds);
+                Ds.Tables[0].TableName = "ShiftTemplate";
+                Ds.Tables[1].TableName = "ShiftDate";
+                Ds.Tables[2].TableName = "DateData";
+
+                // 템플릿
+                DataTable dtTemplate = Ds.Tables[0];
+                // 실데이터
+                DataTable dtRealData = Ds.Tables[1];
+                // 날짜데이터
+                DataTable dtDate = Ds.Tables[2];
+
+                ViewBag.dtTemp = dtTemplate;
+                ViewBag.dtReal = dtRealData;
+                ViewBag.dtDate = dtDate;
+                    
+                    
+                return View();
+            }
+        }
+
+
+
+
+
+
         [HttpGet]
         public IActionResult Index_test() {
             
@@ -151,6 +205,7 @@ namespace Web_Project.Controllers {
                 int num = Int32.Parse(item[1].ToString());
                 DataTable data_Detail = dt1.Select($"ItemSeq='{num}'").CopyToDataTable();
 
+                DataRow[] drs = dt1.Select($"ItemSeq='{num}'");
 
                 //이중 foreach문 dt1 Linq 통해서 id값 뽑아내기
                 // dt0.row[item["id"]][]
@@ -257,7 +312,7 @@ namespace Web_Project.Controllers {
             }
         }
         [HttpGet]
-        public IActionResult Index() {
+        public IActionResult Index_test2(string searchDate) {
 
             string strConn = "server=192.168.253.14;database=dbMobile;UID=sa;Pwd=gk; Timeout=60";
 
@@ -270,7 +325,7 @@ namespace Web_Project.Controllers {
                 if (conn.State == ConnectionState.Closed) {
                     conn.Open();
                 }
-                SqlCommand cmd = new SqlCommand("UP_ShiftCheck_Select_Web_test", conn);
+                SqlCommand cmd = new SqlCommand("UP_ShiftCheck_Select_Web_test2", conn);
                 cmd.CommandTimeout = 3000;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@SelectDate", SqlDbType.VarChar).Value = TodayDate;
@@ -282,16 +337,18 @@ namespace Web_Project.Controllers {
                 Ds.Tables[0].TableName = "ShiftTemplate";
                 Ds.Tables[1].TableName = "ShiftDate";
 
-                DataTable dt0 = Ds.Tables[0];
-                DataTable dt1 = Ds.Tables[1];
+                // 템플릿
+                DataTable dtTemplate = Ds.Tables[0];
+                // 실데이터
+                DataTable dtRealData = Ds.Tables[1];
                 
-                DataList(dt0, dt1);
-                DataList2(SCTM, dt0);
+                DataList(dtTemplate, dtRealData);
+                DataList2(SCTM, dtTemplate);
                 return View(SCTM);
             }
         }
         [HttpPost]
-        public IActionResult Index(SelectDate SD) {
+        public IActionResult Index_test2(SelectDate SD) {
 
             string strConn = "server=192.168.253.14;database=dbMobile;UID=sa;Pwd=gk; Timeout=60";
 
@@ -304,7 +361,7 @@ namespace Web_Project.Controllers {
                 if (conn.State == ConnectionState.Closed) {
                     conn.Open();
                 }
-                SqlCommand cmd = new SqlCommand("UP_ShiftCheck_Select_Web_test", conn);
+                SqlCommand cmd = new SqlCommand("UP_ShiftCheck_Select_Web_test2", conn);
                 cmd.CommandTimeout = 3000;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@SelectDate", SqlDbType.VarChar).Value = DateConvert;
@@ -316,11 +373,11 @@ namespace Web_Project.Controllers {
                 Ds.Tables[0].TableName = "ShiftTemplate";
                 Ds.Tables[1].TableName = "ShiftDate";
 
-                DataTable dt0 = Ds.Tables[0];
-                DataTable dt1 = Ds.Tables[1];
+                DataTable dtTemplate = Ds.Tables[0];
+                DataTable dtRealData = Ds.Tables[1];
 
-                DataList(dt0, dt1);
-                DataList2(SCTM, dt0);
+                DataList(dtTemplate, dtRealData);
+                DataList2(SCTM, dtTemplate);
                 return View(SCTM);
             }
         }

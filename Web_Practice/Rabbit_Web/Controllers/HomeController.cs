@@ -34,7 +34,7 @@ namespace Rabbit_Web.Controllers {
             return View(firstUser);
         } 
 
-        public IActionResult Privacy() {
+        public IActionResult LoginSuccess() {
             return View();
         }
 

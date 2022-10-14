@@ -1,0 +1,478 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Web_Project.Models
+@{
+
+}
+@model List<ShiftTest_Data>
+@{
+    List<int> Chk1_F = new List<int> { 1, 10, 18, 25, 35, 39 };
+    List<int> Chk2 = new List<int> {4,9,12,13,17,20,22,26,27,29,31,32,34 };
+    List<int> Chk3 = new List<int> {24 };
+    List<int> Str1 = new List<int> {6,7,8 };
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <style>
+        tr{
+            text-align: center;
+        }
+        .TitleBody{
+            text-align:left;
+        }
+    </style>
+
+</head>
+<body>
+    <form asp-controller="Shift" asp-action="Index" method="post">
+        <input type="text" id="datepicker" name="Date" autocomplete="off" readonly />
+        <input type="submit" value="조회" />  
+    </form>
+    
+
+    <script src="pikaday.js"></script>
+    <script>
+        var picker = new Pikaday({
+        field: document.getElementById('datepicker'),
+            format: 'YYYY/MM/DD',
+            minDate: new Date(2000, 0, 1),
+            maxDate: new Date(2030, 12, 31),
+            yearRange: [2000, 2030],
+            toString(date, format) {
+            // you should do formatting based on the passed format,
+            // but we will just return 'D/M/YYYY' for simplicity
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            return `${year}/${month}/${day}`;
+        }
+        //,
+        //parse(dateString, format) {
+        //    // dateString is the result of `toString` method
+        //    const parts = dateString.split('/');
+        //    const year = parseInt(parts[0], 10);
+        //    const month = parseInt(parts[1], 10) - 1;
+        //    const day = parseInt(parts[1], 10);
+
+        //    return new Date(year, month, day);
+        //}
+    });
+    </script>
+    <table border="1">
+        <thead>
+            <tr >
+                <th colspan="3" rowspan="2">항목</th>
+                <th width="11%">월</th>
+                <th width="11%">화</th>
+                <th width="11%">수</th>
+                <th width="11%">목</th>
+                <th width="11%">금</th>
+                <th width="11%">토</th>
+            </tr>
+            <tr>
+                <th>@DateTime.ParseExact(@Model[0].Date_Mon,"yyyyMMdd",null).ToShortDateString()</th>
+                <th>@DateTime.ParseExact(@Model[0].Date_Tues,"yyyyMMdd",null).ToShortDateString()</th>
+                <th>@DateTime.ParseExact(@Model[0].Date_Wed,"yyyyMMdd",null).ToShortDateString()</th>
+                <th>@DateTime.ParseExact(@Model[0].Date_Thur,"yyyyMMdd",null).ToShortDateString()</th>
+                <th>@DateTime.ParseExact(@Model[0].Date_Fri,"yyyyMMdd",null).ToShortDateString()</th>
+                <th>@DateTime.ParseExact(@Model[0].Date_Sat,"yyyyMMdd",null).ToShortDateString()</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                if (Chk3.Contains(@item.ItemSeq)) {
+                    <tr>
+                        <th class="TitleBody">@item.ItemSeq</th>
+                        <th class="TitleBody">@item.CheckBody</th>
+                        <th>
+                            @if (item.Mon_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Mon_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                            @if (item.Mon_Input_3 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Tue_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Tue_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                            @if (item.Tue_Input_3 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Wed_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Wed_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                            @if (item.Wed_Input_3 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Thr_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Thr_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                            @if (item.Thr_Input_3 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Fri_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Fri_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                            @if (item.Fri_Input_3 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Sat_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Sat_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                            @if (item.Sat_Input_3 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                    </tr>
+                }
+                else if (Chk2.Contains(@item.ItemSeq)) {
+                    <tr>
+                        <th class="TitleBody">@item.ItemSeq</th>
+                        <th class="TitleBody">@item.CheckBody</th>
+                        <th>
+                            @if (item.Mon_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Mon_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Tue_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Tue_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Wed_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Wed_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Thr_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Thr_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Fri_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Fri_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Sat_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" />
+                            }
+                            @if (item.Sat_Input_2 == "True") {
+                                <input type="checkbox" name="checkbox2" checked />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox2" />
+                            }
+                        </th>
+                    </tr>
+                }
+                else if (Str1.Contains(@item.ItemSeq)) {
+                    <tr >
+                        <th class="TitleBody">@item.ItemSeq</th>
+                        <th class="TitleBody">@item.CheckBody</th>
+                        <th>
+                            @item.Mon_Input_1'℃
+                            /
+                            @item.Mon_Input_2%
+                        </th>
+                        <th>
+                            @item.Tue_Input_1'℃
+                            /
+                            @item.Tue_Input_2%
+                        </th>
+                        <th>
+                            @item.Wed_Input_1'℃
+                            /
+                            @item.Wed_Input_2%
+                        </th>
+                        <th>
+                            @item.Thr_Input_1'℃
+                            /
+                            @item.Thr_Input_2%
+                        </th>
+                        <th>
+                            @item.Fri_Input_1'℃
+                            /
+                            @item.Fri_Input_2%
+                        </th>
+                        <th>
+                            @item.Sat_Input_1'℃
+                            /
+                            @item.Sat_Input_2%
+                        </th>
+                    </tr>
+                }
+                else if (Chk1_F.Contains(item.ItemSeq)) {
+                    <tr>
+                        @if (item.ItemSeq==1) {
+                            <th rowspan="9">기본</th>
+                        }
+                        else if (item.ItemSeq == 10) {
+                            <th rowspan="8">1번랙</th>
+                        }
+                        else if (item.ItemSeq == 18) {
+                            <th rowspan="7">2번랙</th>
+                        }
+                        else if (item.ItemSeq == 25) {
+                            <th rowspan="10">통신랙</th>
+                        }
+                        else if (item.ItemSeq == 35) {
+                            <th rowspan="4">3번랙</th>
+                        }
+                        else if (item.ItemSeq == 39) {
+                            <th rowspan="6">메탈랙</th>
+                        }
+                        <th class="TitleBody">@item.ItemSeq</th>
+                        <th class="TitleBody">@item.CheckBody</th>
+                        <th>
+                            @if (item.Mon_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Tue_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Wed_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Thr_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Fri_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Sat_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                    </tr>
+                } 
+                else {
+                    
+                    <tr>
+                        <th class="TitleBody">@item.ItemSeq</th>
+                        <th class="TitleBody">@item.CheckBody</th>
+                        <th>
+                            @if (item.Mon_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Tue_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Wed_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Thr_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Fri_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                        <th>
+                            @if (item.Sat_Input_1 == "True") {
+                                <input type="checkbox" name="checkbox1" checked readonly />
+                            }
+                            else {
+                                <input type="checkbox" name="checkbox1" readonly />
+                            }
+                        </th>
+                    </tr>
+                    
+                    
+                }
+               
+            }
+        </tbody>
+    </table>
+</body>
+</html>

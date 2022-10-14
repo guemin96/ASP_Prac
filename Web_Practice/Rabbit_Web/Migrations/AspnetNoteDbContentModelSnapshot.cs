@@ -7,7 +7,7 @@ using Rabbit_Web.DataContext;
 
 namespace Rabbit_Web.Migrations
 {
-    [DbContext(typeof(AspnetNoteDbContent))]
+    [DbContext(typeof(AspnetNoteDbContext))]
     partial class AspnetNoteDbContentModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

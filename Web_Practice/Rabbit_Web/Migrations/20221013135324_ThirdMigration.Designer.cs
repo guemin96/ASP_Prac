@@ -8,7 +8,7 @@ using Rabbit_Web.DataContext;
 
 namespace Rabbit_Web.Migrations
 {
-    [DbContext(typeof(AspnetNoteDbContent))]
+    [DbContext(typeof(AspnetNoteDbContext))]
     [Migration("20221013135324_ThirdMigration")]
     partial class ThirdMigration
     {

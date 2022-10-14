@@ -21,10 +21,15 @@ namespace Rabbit_Web {
         public void ConfigureServices(IServiceCollection services) {
 
             //Add framework services
-            //DI
             //Identity
-            //Sesstion
+
+            //Session
+            //서비스에 Session 등록함
+            services.AddSession();  
+
             //Web API 미들웨어
+            
+            //DI 의존성 주입 - ASP.NET MVC 4,5 + Unity플러그인 설치
 
             services.AddControllersWithViews();
         }
@@ -45,6 +50,9 @@ namespace Rabbit_Web {
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //어플리케이션에서 Session 사용
+            app.UseSession();
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
