@@ -1,5 +1,5 @@
 ﻿namespace Web_Project.Models {
-    public class ShiftTest_Data {
+    public class ShiftTest_Data {//
         public int ItemSeq { get; set; }
         public string Week_Date { get; set; }
 
