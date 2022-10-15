@@ -13,12 +13,12 @@ namespace Rabbit_Web.Models {
         /// 게시물 제목
         /// </summary>
         
-        [Required]
+        [Required(ErrorMessage ="게시물 제목을 입력하세요.")]
         public string NoteTitle { get; set; }
         /// <summary>
         /// 게시물 내용
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "게시물 내용을 입력하세요.")]
         public string NoteContents { get; set; }
         /// <summary>
         /// 작성자 번호

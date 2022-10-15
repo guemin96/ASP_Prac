@@ -7,6 +7,17 @@
     <title>@ViewData["Title"] - Rabbit_Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/bootstrap-theme.min.css" />
+    
+    @*trumbowyg 설정*@
+    <link rel="stylesheet" href="~/lib/Trumbowyg-main/dist/ui/trumbowyg.min.css" />
+
 </head>
 <body>
     <header>
@@ -17,30 +28,31 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Note" asp-action="Index">게시물</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav flex-grow-0">
-                        @if (Context.Session.GetInt32("USER_LOGIN_KEY") == null) {
-                            <li class="nav-item">
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Context.Session.GetInt32("USER_LOGIN_KEY") == null)
+                        {
+                            <li >
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">회원가입</a>
                             </li>
-                            <li class="nav-item">
+                            <li >
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">로그인</a>
                             </li>
                         }
-                        else {
-                            <li class="nav-item">
+                        else
+                        {
+                            <li >
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">로그아웃</a>
                             </li>
                         }
-                        
                     </ul>
                 </div>
             </div>
@@ -59,7 +71,10 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/Trumbowyg-main/dist/trumbowyg.min.js"></script>
+    <script src="~/lib/Trumbowyg-main/dist/langs/ko.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
