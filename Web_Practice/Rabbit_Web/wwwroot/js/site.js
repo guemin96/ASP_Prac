@@ -23,11 +23,12 @@ $(".editor").trumbowyg({
         ['superscript', 'subscript'],
         ['link'],
         ['insertImage'],
-        'Image',
+        ['Image'],
         ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
         ['unorderedList', 'orderedList'],
         ['horizontalRule'],
         ['removeformat'],
         ['fullscreen']
-    ]
+    ],
+ 
 });

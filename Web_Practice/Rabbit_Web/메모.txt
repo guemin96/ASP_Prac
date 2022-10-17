@@ -1,0 +1,19 @@
+22-10-15 
+
+bootstrap 적용 방법
+bootstrap 다운로드 후에 절대 경로(~/)를 사용하여 연결시켜줄것
+
+trumbowyg-> head와 body에 각각 알맞은 위치에 넣어줘야 작동함
+
+
+22-10-17 
+image upload의 경우 개발토끼 강의와 똑같이 하면 됨 
+body에 반드시 trumbowyg.upload.js를 넣어줘야함 min을 넣으면 안됨
+
+Enterprise Architecture
+
+접근 순서 : 클라이언트 버튼 -> ASP.NET MVC 리스트 출력 호출 -> BLL -> IDAL->DAL
+
+현재 사용하고 있는 버전에서 HomeController 코드에서 생성자 호출 코드가 _logger로 이미 적혀있어 강의 코드를 따라 했을 때 문제가 생긴다
+현재 버전에서는 이미 의존성주입이 되는 코드가 기본적으로 설정되어있는듯함..
+_logger로 생성자 호출 뿐만 아니라 StartUp에서 이미 다른 코드를 통해 서비스를 불러오기 때문
