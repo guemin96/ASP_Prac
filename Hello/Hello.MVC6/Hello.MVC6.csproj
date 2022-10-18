@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hello.BLL\Hello.BLL.csproj" />
+    <ProjectReference Include="..\Hello.IDAL\Hello.IDAL.csproj" />
+    <ProjectReference Include="..\Hello.Model\Hello.Model.csproj" />
+    <ProjectReference Include="..\Hello.Oracle.DAL\Hello.Oracle.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

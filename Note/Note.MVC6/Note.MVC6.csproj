@@ -5,10 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Note.BLL\Note.BLL.csproj" />
     <ProjectReference Include="..\Note.DAL\Note.DAL.csproj" />
-    <ProjectReference Include="..\Note.IDAL\Note.IDAL.csproj" />
-    <ProjectReference Include="..\Note.Model\Note.Model.csproj" />
   </ItemGroup>
 
 </Project>

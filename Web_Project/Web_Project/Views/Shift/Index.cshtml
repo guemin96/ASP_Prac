@@ -4,19 +4,26 @@
 @using System.Data
 @using Web_Project.Models
 @{
-    var dtTemp = ViewBag.dtTemp as DataTable;
-    var dtReal = ViewBag.dtReal as DataTable;
-    var dtDate = ViewBag.dtDate as DataTable;
+    Layout = null;
+
+    var dtTemp = Model.Tables[0];
+    var dtReal = Model.Tables[1];
+    var dtDate = Model.Tables[2];
+
+    //var dtTemp = ViewBag.dtTemp as DataTable;                   //템플릿 데이터테이블
+    //var dtReal = ViewBag.dtReal as DataTable;                   //실제 데이터 테이블
+    //var dtDate = ViewBag.dtDate as DataTable;                   //날짜 데이터 테이블
     List<int> Chk1_F = new List<int> { 1, 10, 18, 25, 35, 39 };
 
     const int ItemSeqNum = 1;
     const int Input_1_Num = 7;
     const int Input_2_Num = 8;
     const int Input_3_Num = 9;
+    const int ComfirmUser_Num = 10;
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -81,6 +88,7 @@
                 <th width="9%">토</th>
                 <th width="9%">일</th>
             </tr>
+            @*Head에 날짜 표시해주기*@
             <tr>
                 @foreach (DataRow item in dtDate.Rows) {
                     <th>@DateTime.ParseExact( @item["Date"].ToString(),"yyyyMMdd",null).ToShortDateString() </th>
@@ -91,7 +99,7 @@
                       DataRow[] ConfirmUser = dtReal.Select($"ItemSeq=1");
                 }
                 @foreach (DataRow item in ConfirmUser) {
-                    <th>@item[10]</th>
+                    <th>@item[ComfirmUser_Num]</th>
                 }
             </tr>
             
@@ -175,6 +183,7 @@
                        
                     </tr>
                 }
+                
                 else if (Chk1_F.Contains(Int32.Parse(TempDr[1].ToString()))) {
                     <tr>
                         @{

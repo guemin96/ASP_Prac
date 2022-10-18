@@ -53,7 +53,7 @@ namespace Web_Project.Controllers {
                 ViewBag.dtDate = dtDate;
                     
                     
-                return View();
+                return View(Ds);
             }
         }
 
