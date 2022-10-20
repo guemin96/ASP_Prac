@@ -1,0 +1,33 @@
+ASP.NET CORE IDENTITY
+
+- 로그인, 로그아웃, 개별 인증(관리자, 일반사용자)
+
+# Identity 테이블 구조
+1. dbo.ASPNETUSERS => ApplicationUser(유저 클래스)
+- ID, 비밀번호, 사용자 이름 등등
+
+2. dbo.AspNetRoles => ApplicationRole(룰 클래스)
+- 이 웹사이트에 회원 분류
+- 슈퍼 관리자, 관리자, 특별 사용자, 일반 사용자
+
+3. dbo.AspNetUserRoles => 
+-User와 Role을 매칭시켜주는 테이블
+1번 사용자(PK 1) -> 관리자(1)
+2번 사용자(PK 2) -> 일반 사용자(4)
+
+4. dbo.AspNetUserClaims => 5명의 사용자  -> 일반 사용자(Role)
+ex)
+-2명이 나이 20세 미만 -> 20세 미만은 특정 게시판 진입 금지
+Age
+20 	[HttpGet, Authorize(Claims....Age>20)]
+
+5. dbo.AspNetRoleClaims =>
+관리자 - 1등급,2등급,3등급 
+
+6. dbo.AspNetUserLogins => 외부 로그인 Oauth1.0 /2.0
+내가 만든 웹사이트에 회원가입을 하지 않아서 카카오, 네이버 자동 로그인을 통해 로그인 시켜주는 테이블
+
+
+
+7. dbo.AspNetUserTokens => 외부 로그인에 대한 기록
+ 

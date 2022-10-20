@@ -52,7 +52,7 @@
     <script>
         var picker = new Pikaday({
             field: document.getElementById('datepicker'),
-            format: 'YYYY/MM/DD',
+            format: 'YYYY-MM-DD',
             minDate: new Date(2000, 0, 1),
             maxDate: new Date(2030, 12, 31),
             yearRange: [2000, 2030],
@@ -62,7 +62,7 @@
                 const day = date.getDate();
                 const month = date.getMonth() + 1;
                 const year = date.getFullYear();
-                return `${year}/${month}/${day}`;
+                return `${year}-${month}-${day}`;
             }
             //,
             //parse(dateString, format) {
