@@ -5,6 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 using Web_Project.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web_Project.Controllers {
     public class ShiftController : Controller {
@@ -14,15 +17,14 @@ namespace Web_Project.Controllers {
 
             string strConn = "server=192.168.253.14;database=dbMobile;UID=sa;Pwd=gk; Timeout=60";
             string SelectDT = null;
-            if (date== null) {
+            if (date == null) {
                 SelectDT = DateTime.Now.ToString("yyyyMMdd");
             }
             else {
-                SelectDT= DateTime.Parse(date).ToString("yyyyMMdd");
+                SelectDT = DateTime.Parse(date).ToString("yyyyMMdd");
             }
-
-            List<ShiftCheckTotalMember> SCTM = new List<ShiftCheckTotalMember>();
-
+            //string date = DateTime.Now.ToString("yyyy-MM-dd");
+            //SelectDT = DateTime.Now.ToString("yyyyMMdd");
 
             using (SqlConnection conn = new SqlConnection(strConn)) {
                 if (conn.State == ConnectionState.Closed) {
@@ -41,25 +43,64 @@ namespace Web_Project.Controllers {
                 Ds.Tables[1].TableName = "ShiftDate";
                 Ds.Tables[2].TableName = "DateData";
 
-                // 템플릿
-                DataTable dtTemplate = Ds.Tables[0];
-                // 실데이터
-                DataTable dtRealData = Ds.Tables[1];
-                // 날짜데이터
-                DataTable dtDate = Ds.Tables[2];
+                if (date == null) {
+                    ViewBag.Date = DateTime.Now.ToString("yyyy-MM-dd");
+                }
+                else {
+                    ViewBag.Date = date;
 
-                ViewBag.dtTemp = dtTemplate;
-                ViewBag.dtReal = dtRealData;
-                ViewBag.dtDate = dtDate;
-                    
-                    
+                }
                 return View(Ds);
             }
         }
 
+        //[HttpPost]
+        ////[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Index(string date) {
+
+        //    string strConn = "server=192.168.253.14;database=dbMobile;UID=sa;Pwd=gk; Timeout=60";
+        //    string SelectDT = null;
+        //    if (date == null) {
+        //        SelectDT = DateTime.Now.ToString("yyyyMMdd");
+        //    }
+        //    else {
+        //        SelectDT = DateTime.Parse(date).ToString("yyyyMMdd");
+        //    }
 
 
 
+        //    List<ShiftCheckTotalMember> SCTM = new List<ShiftCheckTotalMember>();
+
+
+        //    using (SqlConnection conn = new SqlConnection(strConn)) {
+        //        if (conn.State == ConnectionState.Closed) {
+        //            conn.Open();
+        //        }
+        //        SqlCommand cmd = new SqlCommand("UP_ShiftCheck_Select_Web", conn);
+        //        cmd.CommandTimeout = 3000;
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        cmd.Parameters.Add("@SelectDate", SqlDbType.VarChar).Value = SelectDT;
+
+        //        DataSet Ds = new DataSet();
+
+        //        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+        //        adapter.Fill(Ds);
+        //        Ds.Tables[0].TableName = "ShiftTemplate";
+        //        Ds.Tables[1].TableName = "ShiftDate";
+        //        Ds.Tables[2].TableName = "DateData";
+
+        //        // 템플릿
+        //        DataTable dtTemplate = Ds.Tables[0];
+        //        // 실데이터
+        //        DataTable dtRealData = Ds.Tables[1];
+        //        // 날짜데이터
+        //        DataTable dtDate = Ds.Tables[2];
+
+
+        //        ViewBag.Date = date;
+        //        return View(Ds);
+        //    }
+        //}
 
 
         [HttpGet]

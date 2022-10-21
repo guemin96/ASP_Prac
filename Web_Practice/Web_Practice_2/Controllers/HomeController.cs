@@ -18,8 +18,10 @@ namespace Web_Practice_2.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string data)
         {
+
+            ViewBag.Data = data;
             return View();
         }
 

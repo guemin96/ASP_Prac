@@ -3,6 +3,7 @@
 *@
 @using System.Data
 @using Web_Project.Models
+
 @{
     Layout = null;
 
@@ -20,6 +21,7 @@
     const int Input_2_Num = 8;
     const int Input_3_Num = 9;
     const int ComfirmUser_Num = 10;
+
 }
 
 <!DOCTYPE html>
@@ -41,10 +43,20 @@
             text-align: left;
         }
     </style>
+    @*<script>
+        window.history.forward(); 
+        
+        function noBack() {
+            window.history.forward();
+        }
+    </script>*@
 </head>
 <body>
+    @*onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">*@    @*뒤로가기 방지*@
     <form asp-controller="Shift" asp-action="Index" method="get">
-        <input type="text" id="datepicker" name="Date" autocomplete="off" readonly />
+        <label>날짜 : </label>
+        
+        <input type="text" id="datepicker" name="date" value="@ViewBag.Date"   autocomplete="off"    />
         <input type="submit" value="조회" />
     </form>
 
