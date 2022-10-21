@@ -64,5 +64,23 @@
 
 * Application(public) VS Session(private)
 
+6. Page 클래스 
+
+- IsPostBack : 현재 페이지를 처음 로드했는지, 다시 게시(포스트백) 했는지 확인한다.
+- ClientScript.RegisterClientScriptBlock() : 자바스크립트를 동적으로 웹페이지에 추가한다.
+- Header :  현재 웹 폼의 <head> 태그 부분을 정의한다.
+- Title : 현재 웹 폼의 제목을 동적으로 성정하거나 가져온다.
+- SetFocus() : 다른 컨트롤의 ID 값을 지정해주면 웹 폼이 로드할 때 해당 컨트롤에 포커스가 지정된다.
+  
+
+* asp button 컨트롤은 누르기만 해도 Page_Load가 실행됨. 
+
+
+7. 표준 컨트롤 
+
+* 순수 Html 컨트롤로 구현할 경우 cs 단에서 사용할 수 없지만 runat = "server"를 넣어주면  input과 같은 html 컨트롤도 cs단에서 사용할 수 있다.
+단 html 컨트롤의 경우 value속성으로 접근 가능하다.
+
+
 
 

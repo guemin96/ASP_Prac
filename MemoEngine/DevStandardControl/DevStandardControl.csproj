@@ -7,16 +7,16 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8959B29E-E75F-41BD-9C13-EE9C2E81370C}</ProjectGuid>
+    <ProjectGuid>{122398EB-58A5-4454-9B26-4A7C4DE3075F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DevASPNET</RootNamespace>
-    <AssemblyName>DevASPNET</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <RootNamespace>DevStandardControl</RootNamespace>
+    <AssemblyName>DevStandardControl</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressSSLPort>44388</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -67,37 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DevASPNET.css" />
-    <Content Include="FrmApplicationSession.aspx" />
-    <Content Include="FrmButton.aspx" />
     <Content Include="FrmCalendar.aspx" />
-    <Content Include="FrmLinkButton.aspx" />
-    <Content Include="FrmPageLoad.aspx" />
-    <Content Include="FrmRequest.aspx" />
-    <Content Include="FrmRequestUserHostAddress.aspx" />
-    <Content Include="FrmResponseBuffer.aspx" />
-    <Content Include="FrmResponseRedirect.aspx" />
-    <Content Include="FrmResponseWrite.aspx" />
-    <Content Include="FrmServerMapPath.aspx" />
-    <Content Include="FrmStandardControl.aspx" />
-    <Content Include="FrmTextBox.aspx" />
+    <Content Include="FrmCalendarQueryString.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmApplicationSession.aspx.cs">
-      <DependentUpon>FrmApplicationSession.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmApplicationSession.aspx.designer.cs">
-      <DependentUpon>FrmApplicationSession.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmButton.aspx.cs">
-      <DependentUpon>FrmButton.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmButton.aspx.designer.cs">
-      <DependentUpon>FrmButton.aspx</DependentUpon>
-    </Compile>
     <Compile Include="FrmCalendar.aspx.cs">
       <DependentUpon>FrmCalendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -105,75 +79,12 @@
     <Compile Include="FrmCalendar.aspx.designer.cs">
       <DependentUpon>FrmCalendar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FrmLinkButton.aspx.cs">
-      <DependentUpon>FrmLinkButton.aspx</DependentUpon>
+    <Compile Include="FrmCalendarQueryString.aspx.cs">
+      <DependentUpon>FrmCalendarQueryString.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FrmLinkButton.aspx.designer.cs">
-      <DependentUpon>FrmLinkButton.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmPageLoad.aspx.cs">
-      <DependentUpon>FrmPageLoad.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmPageLoad.aspx.designer.cs">
-      <DependentUpon>FrmPageLoad.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmRequest.aspx.cs">
-      <DependentUpon>FrmRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmRequest.aspx.designer.cs">
-      <DependentUpon>FrmRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmRequestUserHostAddress.aspx.cs">
-      <DependentUpon>FrmRequestUserHostAddress.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmRequestUserHostAddress.aspx.designer.cs">
-      <DependentUpon>FrmRequestUserHostAddress.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmResponseBuffer.aspx.cs">
-      <DependentUpon>FrmResponseBuffer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmResponseBuffer.aspx.designer.cs">
-      <DependentUpon>FrmResponseBuffer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmResponseRedirect.aspx.cs">
-      <DependentUpon>FrmResponseRedirect.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmResponseRedirect.aspx.designer.cs">
-      <DependentUpon>FrmResponseRedirect.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmResponseWrite.aspx.cs">
-      <DependentUpon>FrmResponseWrite.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmResponseWrite.aspx.designer.cs">
-      <DependentUpon>FrmResponseWrite.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmServerMapPath.aspx.cs">
-      <DependentUpon>FrmServerMapPath.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmServerMapPath.aspx.designer.cs">
-      <DependentUpon>FrmServerMapPath.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmStandardControl.aspx.cs">
-      <DependentUpon>FrmStandardControl.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmStandardControl.aspx.designer.cs">
-      <DependentUpon>FrmStandardControl.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmTextBox.aspx.cs">
-      <DependentUpon>FrmTextBox.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmTextBox.aspx.designer.cs">
-      <DependentUpon>FrmTextBox.aspx</DependentUpon>
+    <Compile Include="FrmCalendarQueryString.aspx.designer.cs">
+      <DependentUpon>FrmCalendarQueryString.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,9 +110,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3581</DevelopmentServerPort>
+          <DevelopmentServerPort>64551</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44303/</IISUrl>
+          <IISUrl>https://localhost:44388/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

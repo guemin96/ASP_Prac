@@ -2,7 +2,6 @@
 
 bootstrap 적용 방법
 bootstrap 다운로드 후에 절대 경로(~/)를 사용하여 연결시켜줄것
-
 trumbowyg-> head와 body에 각각 알맞은 위치에 넣어줘야 작동함
 
 
@@ -11,15 +10,36 @@ image upload의 경우 개발토끼 강의와 똑같이 하면 됨
 body에 반드시 trumbowyg.upload.js를 넣어줘야함 min을 넣으면 안됨
 
 Enterprise Architecture
-
 접근 순서 : 클라이언트 버튼 -> ASP.NET MVC 리스트 출력 호출 -> BLL -> IDAL->DAL
-
 현재 사용하고 있는 버전에서 HomeController 코드에서 생성자 호출 코드가 _logger로 이미 적혀있어 강의 코드를 따라 했을 때 문제가 생긴다
 현재 버전에서는 이미 의존성주입이 되는 코드가 기본적으로 설정되어있는듯함..
 _logger로 생성자 호출 뿐만 아니라 StartUp에서 이미 다른 코드를 통해 서비스를 불러오기 때문
 
-
 22-10-20
+* identity 설정 과정에서 기존에는 id가 암호화로 인해 varchar로 설정이 되어있는데 이것을 int로 바꾸는 과정에서 아래 사진과 같은 오류가 발생함
+ 
+개발토끼 강의를 참고 or 
+https://aspdotnet.tistory.com/2510를 참고 한 결과 
+_LoginParital.cshtml의 @inject쪽에 IdentityUser을 ApplicationUser로 바꿔주지 않아 타입의 오류가 발생하였다. 
+.net core mvc 생성을 하게 되었을 때 applicationUser 클래스의 경우 직접 생성해주었다.
 
-* identity 설정 과정에서 기존에는 id가 암호화로 인해 varchar로 설정이 되어있는데 이것을 int로 바꾸는 과정에서
+⦁	Identity 사용시 Identity/Pages/Account 생성 방법
+⦁	Install-Package Microsoft.VisualStudio.Web.CodeGeneration.Design 누겟패키지에 다운로드 받는다.
+⦁	솔루션 탐색기에서 프로젝트를 마우스 오른쪽 버튼으로 클릭 -> 추가-> 새 스캐폴드 항목
+⦁	새 스캐폴드 항목 추가 대화 상자의 왼쪽 창에서 ID-> 추가를 선택합니다.
+⦁	ID 추가 대화 상자에서 원하는 옵션을 선택합니다.
+⦁	선택 후에 (ApplicationDbContext)를 선택하고 추가를 선택한다.
 
+
+[Authorize] 
+- Identity를 사용하지 않더라도 권한이 있는 사람만 들어갈 수 있게 해주는 인증 방법 
+[AllowAnonymous] 
+- Authorize 를 클래스 전체에 걸어놨을 경우에 액션메서드  단위로 allowanoymous를 사용해주면 접근이 가능하도록 만들어준다. 
+
+ReturnURL을 사용하는 이유 : 사용자가 기존에 보던 화면으로 돌아가도록 하여 편리성을 제공하기 위함 
+
+⦁	 View -> Controller로 데이터를 넘길 때 input(name의 값을 controller의 파라미터와 동일한 이름으로 설정해줘야 controller에서 데이터를 넘겨 받을 수 있다.)
+
+
+2022-10-22 
+네이버에서도 로그인 페이지에서 로그인 한뒤에 뒤로가기 누르면 에러 발생함(post 방식은 에러가 나는 걸로 생각해야될듯)

@@ -7,16 +7,16 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8959B29E-E75F-41BD-9C13-EE9C2E81370C}</ProjectGuid>
+    <ProjectGuid>{5DFF2E76-D2B7-47BC-94EE-608ECAAADD70}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DevASPNET</RootNamespace>
-    <AssemblyName>DevASPNET</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <RootNamespace>DevStateManagement</RootNamespace>
+    <AssemblyName>DevStateManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressSSLPort>44341</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -67,113 +67,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DevASPNET.css" />
-    <Content Include="FrmApplicationSession.aspx" />
-    <Content Include="FrmButton.aspx" />
-    <Content Include="FrmCalendar.aspx" />
-    <Content Include="FrmLinkButton.aspx" />
-    <Content Include="FrmPageLoad.aspx" />
-    <Content Include="FrmRequest.aspx" />
-    <Content Include="FrmRequestUserHostAddress.aspx" />
-    <Content Include="FrmResponseBuffer.aspx" />
-    <Content Include="FrmResponseRedirect.aspx" />
-    <Content Include="FrmResponseWrite.aspx" />
-    <Content Include="FrmServerMapPath.aspx" />
-    <Content Include="FrmStandardControl.aspx" />
-    <Content Include="FrmTextBox.aspx" />
+    <Content Include="FrmStateManagement.aspx" />
+    <Content Include="FrmStateShow.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmApplicationSession.aspx.cs">
-      <DependentUpon>FrmApplicationSession.aspx</DependentUpon>
+    <Compile Include="FrmStateManagement.aspx.cs">
+      <DependentUpon>FrmStateManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FrmApplicationSession.aspx.designer.cs">
-      <DependentUpon>FrmApplicationSession.aspx</DependentUpon>
+    <Compile Include="FrmStateManagement.aspx.designer.cs">
+      <DependentUpon>FrmStateManagement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FrmButton.aspx.cs">
-      <DependentUpon>FrmButton.aspx</DependentUpon>
+    <Compile Include="FrmStateShow.aspx.cs">
+      <DependentUpon>FrmStateShow.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FrmButton.aspx.designer.cs">
-      <DependentUpon>FrmButton.aspx</DependentUpon>
+    <Compile Include="FrmStateShow.aspx.designer.cs">
+      <DependentUpon>FrmStateShow.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FrmCalendar.aspx.cs">
-      <DependentUpon>FrmCalendar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmCalendar.aspx.designer.cs">
-      <DependentUpon>FrmCalendar.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmLinkButton.aspx.cs">
-      <DependentUpon>FrmLinkButton.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmLinkButton.aspx.designer.cs">
-      <DependentUpon>FrmLinkButton.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmPageLoad.aspx.cs">
-      <DependentUpon>FrmPageLoad.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmPageLoad.aspx.designer.cs">
-      <DependentUpon>FrmPageLoad.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmRequest.aspx.cs">
-      <DependentUpon>FrmRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmRequest.aspx.designer.cs">
-      <DependentUpon>FrmRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmRequestUserHostAddress.aspx.cs">
-      <DependentUpon>FrmRequestUserHostAddress.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmRequestUserHostAddress.aspx.designer.cs">
-      <DependentUpon>FrmRequestUserHostAddress.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmResponseBuffer.aspx.cs">
-      <DependentUpon>FrmResponseBuffer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmResponseBuffer.aspx.designer.cs">
-      <DependentUpon>FrmResponseBuffer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmResponseRedirect.aspx.cs">
-      <DependentUpon>FrmResponseRedirect.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmResponseRedirect.aspx.designer.cs">
-      <DependentUpon>FrmResponseRedirect.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmResponseWrite.aspx.cs">
-      <DependentUpon>FrmResponseWrite.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmResponseWrite.aspx.designer.cs">
-      <DependentUpon>FrmResponseWrite.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmServerMapPath.aspx.cs">
-      <DependentUpon>FrmServerMapPath.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmServerMapPath.aspx.designer.cs">
-      <DependentUpon>FrmServerMapPath.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmStandardControl.aspx.cs">
-      <DependentUpon>FrmStandardControl.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmStandardControl.aspx.designer.cs">
-      <DependentUpon>FrmStandardControl.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FrmTextBox.aspx.cs">
-      <DependentUpon>FrmTextBox.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmTextBox.aspx.designer.cs">
-      <DependentUpon>FrmTextBox.aspx</DependentUpon>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -185,6 +100,10 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -199,9 +118,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3581</DevelopmentServerPort>
+          <DevelopmentServerPort>64700</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44303/</IISUrl>
+          <IISUrl>https://localhost:44341/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
