@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Chap10.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <a href="~/10-2-1.aspx" runat="server" >Home</a>
+            <a href="~/10-2-2.aspx" runat="server" >회사소개</a>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                이것은 마스터 페이지에서 정의한 기본 콘텐츠입니다.
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
