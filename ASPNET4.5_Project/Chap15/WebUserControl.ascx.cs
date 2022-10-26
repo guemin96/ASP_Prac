@@ -5,9 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Chap10 {
-    public partial class _10_5 : System.Web.UI.Page {
+namespace Chap15 {
+    public partial class WebUserControl : System.Web.UI.UserControl {
         protected void Page_Load(object sender, EventArgs e) {
+            Label1.Text = DateTime.Now.ToLongTimeString();
         }
     }
 }
