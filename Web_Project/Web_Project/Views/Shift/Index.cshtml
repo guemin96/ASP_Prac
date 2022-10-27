@@ -31,16 +31,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="~/css/site.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-    <style>
-        tr {
-            text-align: center;
-        }
-        
 
-        .TitleBody {
-            text-align: left;
+    <style>
+        .chk_box{
+            display:block;
+            position:relative;
+            padding-left:5px;
+            margin-bottom:10px;
+            cursor:pointer;
+            font-size:14px;
+            width:30%;
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+            display:inline;
+            margin-right:30px;
+        }
+
+/*        .chk_box input[type=checkbox]{display:none;}*/
+
+        .on{
+            width:20px;
+            height:20px;
+            background:#ddd;
+            position:absolute;
+            top:0;
+            left:0;
+            border-radius:2px 2px 2px 2px;
+        }
+
+        .chk_box input[type="checkbox"]:checked + .on {
+            background: #2155A5;
+        }
+
+        .on:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .chk_box input[type="checkbox"]:checked + .on:after {
+            display: block;
+        }
+
+        .on:after {
+            width: 6px;
+            height: 10px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            position: absolute;
+            left: 6px;
+            top: 2px;
+        }
+
+        .imgPadding
+        {
+            padding:1em;
         }
     </style>
     @*<script>
@@ -52,25 +105,36 @@
     </script>*@
 </head>
 <body>
+
     @*onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">*@    @*뒤로가기 방지*@
-    <form asp-controller="Shift" asp-action="Index" method="get">
-        <label>날짜 : </label>
-        
-        <input type="text" id="datepicker" name="date" value="@ViewBag.Date"   autocomplete="off"    />
-        <input type="submit" value="조회" />
-    </form>
+    <div style="display:inline">
+        <div >
+           
+        </div>
+        <div>
+            <form asp-controller="Shift" asp-action="Index" method="get" class="font" >
+                <img src="~/Img/TRIAL.png" class="imgPadding" />
+                <div style="float:right;padding-top:30px;">
+                    <label>쉬프트 체크 날짜 : </label>
+                    <input type="text" id="datepicker" name="date" value="@ViewBag.Date" autocomplete="off" style="font-size:18px; " />
+                    <input type="submit" value="조회" style="font-size:15px;" />
+                </div>
+                
+            </form>
+        </div>
+    
+    </div>
+    
 
     <script src="pikaday.js"></script>
     <script>
         var picker = new Pikaday({
             field: document.getElementById('datepicker'),
             format: 'YYYY-MM-DD',
-            minDate: new Date(2000, 0, 1),
+            minDate: new Date(2018, 0, 1),
             maxDate: new Date(2030, 12, 31),
-            yearRange: [2000, 2030],
+            yearRange: [2018, 2030],
             toString(date, format) {
-                // you should do formatting based on the passed format,
-                // but we will just return 'D/M/YYYY' for simplicity
                 const day = date.getDate();
                 const month = date.getMonth() + 1;
                 const year = date.getFullYear();
@@ -88,11 +152,11 @@
             //}
         });
     </script>
-    <table border="1">
-        <thead>
+    <table width="100%" >
+        <thead class="member">
             <tr>
                 <th colspan="3" rowspan="3">항목</th>
-                <th width="9%">월</th>
+                <th width="9%" >월</th>
                 <th width="9%">화</th>
                 <th width="9%">수</th>
                 <th width="9%">목</th>
@@ -116,21 +180,21 @@
             </tr>
             
         </thead>
-        <tbody>
+        <tbody class="member">
             @foreach (DataRow TempDr in dtTemp.Rows) {
                 if (TempDr["CheckTypeID"].ToString().Equals("4")) {
                     <tr>
                         @{
                             DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
+                        <td style="text-align:center">@TempDr["ItemSeq"]</td>
+                        <td class="TitleBody">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
-                            <th style="font-size:12px">
+                            <td style="text-align:center">
                                 @DL[Input_1_Num]'℃
                                 /
                                 @DL[Input_2_Num]%
-                            </th>
+                            </td>
                         }
                     </tr>
                 }
@@ -140,30 +204,48 @@
                             DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
 
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
+                        <td style="text-align:center">@TempDr["ItemSeq"]</td>
+                        <td class="TitleBody">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
-                            <th>
+                            <td>
                                 @if (DL[Input_1_Num].Equals("True")) {
-                                    <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden checked onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 else {
-                                    <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 @if (DL[Input_2_Num].Equals("True")) {
-                                    <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden checked onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 else {
-                                    <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 @if (DL[Input_3_Num].Equals("True")) {
-                                    <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden checked onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 else {
-                                    <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
 
-                            </th>
+                            </td>
                         }
                        
                     </tr>
@@ -174,63 +256,82 @@
                             DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
 
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
+                        <td style="text-align:center">@TempDr["ItemSeq"]</td>
+                        <td class="TitleBody">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
-                            <th>
+                            <td >
                                 @if (DL[Input_1_Num].Equals("True")) {
+                                    <label for="checkbox" class="chk_box">
                                     <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                    <span class="on"></span>
+                                </label>
                                 }
                                 else {
-                                    <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 @if (DL[Input_2_Num].Equals("True")) {
-                                    <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 else {
-                                    <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
-                            </th>
+                                
+                            </td>
                         }
                        
                     </tr>
                 }
                 
                 else if (Chk1_F.Contains(Int32.Parse(TempDr[1].ToString()))) {
-                    <tr>
+                    <tr >
                         @{
                             DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
 
                         }
                         @if (TempDr[ItemSeqNum].ToString().Equals("1")) {
-                            <th  rowspan="9">기본</th>
+                            <td rowspan="9" style="text-align:center">기본</td>
                         }
                         else if (TempDr[ItemSeqNum].ToString().Equals("10")) {
-                            <th rowspan="8">1번랙</th>
+                            <td rowspan="8" style="text-align:center">1번랙</td>
                         }
                         else if (TempDr[ItemSeqNum].ToString().Equals("18")) {
-                            <th rowspan="7">2번랙</th>
+                            <td rowspan="7" style="text-align:center">2번랙</td>
                         }
                         else if (TempDr[ItemSeqNum].ToString().Equals("25")) {
-                            <th rowspan="10">통신랙</th>
+                            <td rowspan="10" style="text-align:center">통신랙</td>
                         }
                         else if (TempDr[ItemSeqNum].ToString().Equals("35")) {
-                            <th rowspan="4">3번랙</th>
+                            <td rowspan="4" style="text-align:center">3번랙</td>
                         }
                         else if (TempDr[ItemSeqNum].ToString().Equals("39")) {
-                            <th rowspan="6">메탈랙</th>
+                            <td rowspan="6" style="text-align:center">메탈랙</td>
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
+                        <td style="text-align:center">@TempDr["ItemSeq"]</td>
+                        <td class="TitleBody">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
-                            <th>
+                            <td>
                                 @if (DL[Input_1_Num].Equals("True")) {
-                                    <input type="checkbox" name="checkbox" checked readonly onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 else {
-                                    <input type="checkbox" name="checkbox" readonly onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
-                            </th>
+                            </td>
                         }
                        
                     </tr>
@@ -241,17 +342,23 @@
                             DataRow[] DataList = dtReal.Select($"ItemSeq={TempDr[ItemSeqNum].ToString()}");
 
                         }
-                        <th class="TitleBody">@TempDr["ItemSeq"]</th>
-                        <th class="TitleBody">@TempDr["CheckBody"]</th>
+                        <td style="text-align:center">@TempDr["ItemSeq"]</td>
+                        <td class="TitleBody">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
-                            <th>
+                            <td>
                                 @if (DL[Input_1_Num].Equals("True")) {
-                                    <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
                                 else {
-                                    <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                    <label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                        <span class="on"></span>
+                                    </label>
                                 }
-                            </th>
+                            </td>
                         }
                     </tr>
                 }
