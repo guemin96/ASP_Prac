@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/Default.aspx" title="Home"  description="메인페이지">
+    <siteMapNode url="~/Introduce.aspx" title="사이트 소개"  description="사이트 소개" />
+	<siteMapNode url="~/QNA.aspx" title="Q&amp;A"  description="답변 게시판" >
+		<siteMapNode url="~/AspNetBoard.aspx" title="ASP.NET" description="ASP.NET 게시판"></siteMapNode>
+		<siteMapNode url="~/BooksBoard.aspx" title="Books" description="책 관련 게시판"></siteMapNode>	
+	</siteMapNode>
+	<siteMapNode url="~/Lecture.aspx" title="강의실" description="개발 관련 강의실">
+		<siteMapNode url="~/Basis.aspx" title="기초 강의실" description="ASP.NET 기초 강의">
+			<siteMapNode url="~/Html.aspx" title="HTML" description="HTML 강의"></siteMapNode>
+		</siteMapNode>
+		<siteMapNode url="~/Primary.aspx" title="초급 강의실" description="ASP.NET 초급 강의">
+			<siteMapNode url="~/Csharp.aspx" title="C# " description="C# 강의"></siteMapNode>
+		</siteMapNode>
+	</siteMapNode>
+  </siteMapNode>
+</siteMap>
