@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prac_Web4.5", "Prac_Web4.5\Prac_Web4.5.csproj", "{B4752603-5123-459D-A98F-2856ED910861}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_Validate", "App_Validate\App_Validate.csproj", "{CCD7F814-3154-4C66-B5DB-A5009DF89AD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4752603-5123-459D-A98F-2856ED910861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4752603-5123-459D-A98F-2856ED910861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4752603-5123-459D-A98F-2856ED910861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4752603-5123-459D-A98F-2856ED910861}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCD7F814-3154-4C66-B5DB-A5009DF89AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCD7F814-3154-4C66-B5DB-A5009DF89AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCD7F814-3154-4C66-B5DB-A5009DF89AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCD7F814-3154-4C66-B5DB-A5009DF89AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A5E0E98-FFFF-497A-8DCC-68915DB39A22}
+	EndGlobalSection
+EndGlobal
