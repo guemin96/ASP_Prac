@@ -258,6 +258,8 @@
     <Compile Include="DotNetNote\Models\BoardWriteFormType.cs" />
     <Compile Include="DotNetNote\Models\ContentEncodingType.cs" />
     <Compile Include="DotNetNote\Models\Note.cs" />
+    <Compile Include="DotNetNote\Models\NoteComment.cs" />
+    <Compile Include="DotNetNote\Models\NoteCommentRepository.cs" />
     <Compile Include="DotNetNote\Models\NoteRepository.cs" />
     <Compile Include="DotNetNote\ThumbNail.aspx.cs">
       <DependentUpon>ThumbNail.aspx</DependentUpon>
