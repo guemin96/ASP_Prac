@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ImageText.aspx.cs" Inherits="BOARD_PROJECT.DotNetNote.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ImageText.aspx.cs" Inherits="BOARD_PROJECT.DotNetNote.ImageText" %>
 
 <!DOCTYPE html>
 

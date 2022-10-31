@@ -28,6 +28,18 @@ namespace BOARD_PROJECT.DotNetNote
                 Response.Clear();
                 Response.End();
             }
+            else
+            {
+                //다운로드 카운트 증가 메서트 호출
+                _repository.UpdateDownCount(fileName);
+
+                // 강제 다운로드 창 띄우기 
+                Response.Clear();
+                Response.ContentType = "application/octet-stream";
+                Response.AddHeader("Content-Disposition", "attachment;filename=Server.UrlPathEncode((fileName.Length>50)?fileName.Substring(fileName.Length - 50,50):fileName");
+                Response.WriteFile(dir + fileName);
+                Response.End();
+            }
         }
     }
 }

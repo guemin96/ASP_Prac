@@ -28,7 +28,7 @@ namespace BOARD_PROJECT.DotNetNote.Models
 
             var p = new DynamicParameters();
 
-            p.Add("@Name",value: n.Name, dbType: DbType.Int32);
+            p.Add("@Name",value: n.Name, dbType: DbType.String);
             p.Add("@Email",value: n.Email, dbType: DbType.String);
             p.Add("@Title",value: n.Title, dbType: DbType.String);
             p.Add("@Content",value: n.Content, dbType: DbType.String);
