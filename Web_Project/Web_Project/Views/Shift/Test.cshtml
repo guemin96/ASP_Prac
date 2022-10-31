@@ -1,0 +1,102 @@
+﻿
+@{
+}
+<style>
+    .chk_label {
+        width: 20px;
+        height: 20px;
+        background: #2155A5;
+        border-radius: 2px 2px 2px 2px;
+        margin:0.5em;
+    }
+    .chk_display{
+        width: 8px;
+        height: 12px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        margin-left : 0.3em;
+    }
+
+    .chkNone_label {
+        width: 20px;
+        height: 20px;
+        background: #999;
+        border-radius: 2px 2px 2px 2px;
+        margin: 0.5em;
+    }
+
+</style>
+@*<span class="chkNone_label"></span>
+
+<div>
+    1
+    <label class="chk_label"><span class="chk_display"></span></label>
+
+</div>
+<div>
+    2
+    <label class="chkNone_label"></label>
+
+</div>
+*@
+<head>
+
+</head>
+<body>
+    <h1>View</h1>
+   @* <label class="chk_label"></label>
+    <label class="chk_label"></label>
+    <div class="grand_parent">
+        <div class="parent">
+            <label class="child"></label>
+            <label class="child"></label>
+            <div class="child">1</div>
+            <div class="child absolute">2</div>
+            <div class="child">3</div>
+        </div>
+    </div>
+*@
+<div>
+        <div>
+            <label class="chk_label"> <label class="chk_display"></label></label>
+            <label class="chk_label"> <label class="chk_display"></label></label>
+            <label class="chkNone_label"><label></label></label>
+
+
+        </div>
+        <div>
+            <label class="chkNone_label"></label>
+
+        </div>
+</div>
+   
+
+<table>
+    <thead>
+        <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+        </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+    </tbody>
+</table>
+
+</body>
+
+
+
+
+
