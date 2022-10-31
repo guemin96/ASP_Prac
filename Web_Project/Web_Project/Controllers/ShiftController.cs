@@ -63,5 +63,9 @@ namespace Web_Project.Controllers {
                 return View(Ds);
             }
         }
+
+        public IActionResult Test() {
+            return View();
+        }
     }
 }

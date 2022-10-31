@@ -7,13 +7,10 @@
 @{
     Layout = null;
 
-    var dtTemp = Model.Tables[0];
-    var dtReal = Model.Tables[1];
-    var dtDate = Model.Tables[2];
+    var dtTemp = Model.Tables[0];           //템플릿 데이터테이블
+    var dtReal = Model.Tables[1];           //실제 데이터 테이블
+    var dtDate = Model.Tables[2];           //날짜 데이터 테이블
 
-    //var dtTemp = ViewBag.dtTemp as DataTable;                   //템플릿 데이터테이블
-    //var dtReal = ViewBag.dtReal as DataTable;                   //실제 데이터 테이블
-    //var dtDate = ViewBag.dtDate as DataTable;                   //날짜 데이터 테이블
     List<int> Chk1_F = new List<int> { 1, 10, 18, 25, 35, 39 };
 
     const int ItemSeqNum = 1;
@@ -36,7 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 
     <style>
-        .chk_box{
+       /* .chk_box{
             display:block;
             position:relative;
             padding-left:5px;
@@ -50,10 +47,37 @@
             user-select:none;
             display:inline;
             margin-right:30px;
+        }*/
+
+        .chk_display {
+            width: 8px;
+            height: 12px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            
+        }
+        .td{
+            display:flex;
+        }
+        .chkNone_label {
+            width: 20px;
+            height: 20px;
+            background: #999;
+            position: absolute;
+            border-radius: 2px 2px 2px 2px;
         }
 
-/*        .chk_box input[type=checkbox]{display:none;}*/
-
+        .chk_label {
+            width:20px;
+            height:20px;
+            background:#2155A5;
+            position:absolute;
+            border-radius: 2px 2px 2px 2px;
+        }
         .on{
             width:20px;
             height:20px;
@@ -240,7 +264,7 @@
                                 }
                                 else {
                                     <label for="checkbox" class="chk_box">
-                                        <input type="checkbox" id="checkbox" name="checkbox" hidden onclick="return false" />
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden  onclick="return false" />
                                         <span class="on"></span>
                                     </label>
                                 }
@@ -262,25 +286,25 @@
                             <td >
                                 @if (DL[Input_1_Num].Equals("True")) {
                                     <label for="checkbox" class="chk_box">
-                                    <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden checked onclick="return false" />
                                     <span class="on"></span>
                                 </label>
                                 }
                                 else {
                                     <label for="checkbox" class="chk_box">
-                                        <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden onclick="return false" />
                                         <span class="on"></span>
                                     </label>
                                 }
                                 @if (DL[Input_2_Num].Equals("True")) {
                                     <label for="checkbox" class="chk_box">
-                                        <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden checked onclick="return false" />
                                         <span class="on"></span>
                                     </label>
                                 }
                                 else {
                                     <label for="checkbox" class="chk_box">
-                                        <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden onclick="return false" />
                                         <span class="on"></span>
                                     </label>
                                 }
@@ -321,13 +345,13 @@
                             <td>
                                 @if (DL[Input_1_Num].Equals("True")) {
                                     <label for="checkbox" class="chk_box">
-                                        <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden checked onclick="return false" />
                                         <span class="on"></span>
                                     </label>
                                 }
                                 else {
                                     <label for="checkbox" class="chk_box">
-                                        <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden onclick="return false" />
                                         <span class="on"></span>
                                     </label>
                                 }
@@ -347,16 +371,19 @@
                         @foreach (var DL in DataList) {
                             <td>
                                 @if (DL[Input_1_Num].Equals("True")) {
-                                    <label for="checkbox" class="chk_box">
-                                        <input type="checkbox" id="checkbox" name="checkbox" checked onclick="return false" />
+                                    @*<label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" checked hidden onclick="return false" />
                                         <span class="on"></span>
-                                    </label>
+                                    </label>*@
+                                    <label class="chk_label"><label class="chk_display"></label></label>
                                 }
                                 else {
-                                    <label for="checkbox" class="chk_box">
-                                        <input type="checkbox" id="checkbox" name="checkbox" onclick="return false" />
+                                    @*<label for="checkbox" class="chk_box">
+                                        <input type="checkbox" id="checkbox" name="checkbox" hidden onclick="return false" />
                                         <span class="on"></span>
-                                    </label>
+                                    </label>*@
+                                    <label class="chkNone_label"><label></label></label>
+
                                 }
                             </td>
                         }

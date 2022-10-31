@@ -10,3 +10,7 @@
 2. css 사용할 때 왜 사용하는지 어떻게 적용되는건지 파악하고 사용하기
 3. Css 클래스 이름 알기 쉽게 지정하기
 4. checkbox 사용안하고 Label로 표현하기
+
+2022-10-31
+1. td : display-flex
+2. label : relative로 변경
