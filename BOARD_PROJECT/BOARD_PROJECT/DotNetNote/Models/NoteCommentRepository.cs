@@ -37,6 +37,17 @@ namespace BOARD_PROJECT.DotNetNote.Models
             con.Execute(sql, parameters, commandType: CommandType.StoredProcedure);
         }
         /// <summary>
+        /// 특정 게시물에 해당하는 댓글 리스트
+        /// </summary>
+        public List<NoteComment> GetNoteComments(int boardId) {
+            return con.Query<NoteComment>(
+                "Select * From NoteComments Where BoardId = @BoardId"
+                , new { BoardId = boardId }
+                , commandType: CommandType.Text).ToList();
+        }
+
+
+        /// <summary>
         /// 특정 게시물의 특정 Id에 해당하는 댓글 카운트
         /// </summary>
         /// <param name="boardId"></param>

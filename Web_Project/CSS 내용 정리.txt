@@ -1,4 +1,7 @@
 2022-10-31
+
+Display VS Position
+
 CSS Position 
 * position 속성을 통해 문서 상에서 요소를 배치하는 방법
 * top,right,bottom,left 속성을 통해 요소의 최종 위치를 결정한다.
@@ -6,14 +9,59 @@ CSS Position
 1. 기준을 잡는다. (position : relative)
 2. 이동시킨다. (top: 50px)
 
-Block : 한 줄 모두 차지(대표 element <p>,<div>) 
-Inline : 콘텐츠 크기 만큼만 차지 (대표 element <span>)
+
 
 기준값 
 static : 기준없음(배치불가능/기본값)
-relative : 요소 자기 자신을 기준으로 배치
-absolute : 부모(조상) 요소를 기준으로 배치
+	다른 태그와의 관계에 따라 배치되며 임의로 위치 조절은 불가능
+
+
+absolute : 1) 부모(조상) 요소를 기준으로 배치
+	* static은 부모가 될 수 없기 때문에 absolute를 사용할 때는 부모 요소에 relative를 설정(만약 부모, 조상이 모두 static인 경우에는 최상위 요소인 body를 기준으로 이동)
+	 2) 다른 요소가 자리잡고 있어도 옆으로 밀리지 않고 요소 위에 위치하며 이는 z-index 프로퍼티로 레이어 조정이 가능
+	 3) absolute 사용시 block요소도 inline요소와 같이 컨텐츠 영역만을 차지하기 때문에 반드시 width height크기 설정을 해야합니다.
+	 4) 부모의 위치를 벗어나 어디든  자유롭게 위치가능?
+
+
+relative : 요소 자기 자신을 기준으로 배치(static 위치를 기준으로 움직임)
+	
+	
+
 fixed : 뷰포트 기준으로 배치
 stickey : 스크롤 영역 기준으로 배치
 
 Relative의 경우에는 다른 영역에 영향을 주지 않고 본인만 따로 움직인다.
+
+
+
+CSS Display
+
+1. Box - model 계열 (대부분 태그에서 사용하는 값)
+
+Block : 한 줄 모두 차지(대표 element <p>,<div>) 
+Inline : 콘텐츠 크기 만큼만 차지 (대표 element <span>)
+Inline-block : 한줄에 여러개 가능, 그외에는 block의 특성을 가짐
+
+2. List 계열
+
+<li> 태그에서는 list-item이라는 속성을 사용합니다.
+기본적으로는 block요소처럼 작용하지만, 추가적으로 list-style 속성을 이용할 수 있다는 특징이 있습니다.
+
+3. Table 계열
+
+<table> 태그와 그 부속 태그에서 사용되는 값입니다. display 프로퍼티 값의 2/3를 차지하는 비중있는 녀석이라 
+The CSS table model를 살펴보면 <table>과 부속태그에는 저마다의 display 속성값이 정해져 있음을 알 수 있습니다.
+
+
+4. 기타
+
+none : 해당 요소와 그 자식요소까지 화면과 레이아웃 자체에서 완전히 사라지게 됩니다. 영역조차 남지 않습니다.
+inherit : 부모요소의 display 속성을 그대로 따르게 됩니다.
+
+display : none VS visibility : hidden
+(완전히 사라짐)    (자리는 차지)
+
+
+
+CSS 파일로 적용시키는 경우 브라우저에서는 캐시로 저장하고 있기 때문에 변경해도 변하지 않는 경우가 발생한다.
+이때 캐시를 지워주고 다시 실행시키도록 한다.
