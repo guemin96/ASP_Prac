@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BoardDown.aspx.cs" Inherits="BOARD_PROJECT.DotNetNote.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BoardDown.aspx.cs" Inherits="BOARD_PROJECT.DotNetNote.BoardDown" %>
 
 <!DOCTYPE html>
 

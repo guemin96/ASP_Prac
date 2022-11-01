@@ -34,7 +34,7 @@ namespace BOARD_PROJECT.DotNetNote.Models
                             Update Notes Set CommentCount = CommentCount + 1
                             Where Id = @BoardId";
 
-            con.Execute(sql, parameters, commandType: CommandType.StoredProcedure);
+            con.Execute(sql, parameters, commandType: CommandType.Text);
         }
         /// <summary>
         /// 특정 게시물에 해당하는 댓글 리스트
@@ -60,6 +60,18 @@ namespace BOARD_PROJECT.DotNetNote.Models
                                     "Where BoardId = @BoardId And Id = @Id And Password = @Password",
                                     new { BoardId = boardId, Id = id, Password = password },
                                     commandType: CommandType.Text).SingleOrDefault();
+        }
+        /// <summary>
+        /// 댓글 삭제 
+        /// </summary>
+        public int DeleteNoteComment(int boardId, int id, string password)
+        {
+            return con.Execute(@"Delete NoteComments 
+                Where BoardId = @BoardId And Id = @Id And Password = @Password; 
+                Update Notes Set CommentCount = CommentCount - 1 
+                Where Id = @BoardId"
+                , new { BoardId = boardId, Id = id, Password = password }
+                , commandType: CommandType.Text);
         }
         /// <summary>
         /// 최근 댓글 리스트 전체
