@@ -1,6 +1,9 @@
 ﻿using BOARD_PROJECT.DotNetNote.Controls;
 using BOARD_PROJECT.DotNetNote.Models;
 using System;
+using System.Data;
+using System.Net;
+using System.Web;
 using System.Web.UI;
 
 namespace BOARD_PROJECT.DotNetNote {
@@ -21,6 +24,16 @@ namespace BOARD_PROJECT.DotNetNote {
         }
 
         protected void Page_Load(object sender, EventArgs e) {
+
+            if (!IsPostBack) {
+                Console.WriteLine("포스트백 아님");
+                Session["username"] = "gyumin";
+                Session["password"] = "guemin";
+            }
+            else {
+                Console.WriteLine("PostBack임");
+            }
+
             // 검색 모드 결정
             SearchMode =
                 (!string.IsNullOrEmpty(Request.QueryString["SearchField"]) &&
@@ -39,18 +52,20 @@ namespace BOARD_PROJECT.DotNetNote {
                 PageIndex = 0; // 1 페이지
             }
 
-            // 쿠키를 사용한 리스트 페이지 번호 유지 적용: 
-            //    100번째 페이지의 글 보고, 다시 리스트 왔을 때 100번째 페이지 표시
-            if (Request.Cookies["DotNetNote"] != null) {
-                if (!String.IsNullOrEmpty(
-                    Request.Cookies["DotNetNote"]["PageNum"])) {
-                    PageIndex = Convert.ToInt32(
-                        Request.Cookies["DotNetNote"]["PageNum"]);
-                }
-                else {
-                    PageIndex = 0;
-                }
-            }
+            //// 쿠키를 사용한 리스트 페이지 번호 유지 적용: 
+            ////    100번째 페이지의 글 보고, 다시 리스트 왔을 때 100번째 페이지 표시
+            //if (Request.Cookies["DotNetNote"] != null) {
+            //    if (!String.IsNullOrEmpty(
+            //        Request.Cookies["DotNetNote"].Value)) {
+            //        PageIndex = Convert.ToInt32(
+            //            Request.Cookies["DotNetNote"].Value);
+
+            //    }
+            //    else {
+            //        PageIndex = 0;
+            //    }
+            //}
+
 
             // 레코드 카운트 출력
             if (SearchMode == false) {
@@ -77,6 +92,7 @@ namespace BOARD_PROJECT.DotNetNote {
         private void DisplayData() {
             if (SearchMode == false) // 기본 리스트
             {
+
                 ctlBoardList.DataSource = _repository.GetAll(PageIndex);
             }
             else // 검색 결과 리스트
@@ -87,7 +103,5 @@ namespace BOARD_PROJECT.DotNetNote {
 
             ctlBoardList.DataBind();
         }
-
-        
     }
 }

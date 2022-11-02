@@ -16,7 +16,7 @@
     <br />
     <% if (!string.IsNullOrEmpty(Request.QueryString["SearchField"]) && !String.IsNullOrEmpty(Request.QueryString["SearchQuery"])) { %>
     <div style="text-align:center">
-        <a href="../BoardList.aspx" class="btn btn-success">검색완료</a>
+        <a href="BoardList.aspx" class="btn btn-success">검색완료</a>
     </div>
     <% } %>
 </div>

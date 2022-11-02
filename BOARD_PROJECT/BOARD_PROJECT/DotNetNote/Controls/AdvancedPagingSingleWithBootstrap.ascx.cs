@@ -28,8 +28,11 @@ namespace BOARD_PROJECT.DotNetNote.Controls {
         [Description("한 페이지에 몇 개의 레코드를 보여줄 건지 결정")]
         public int PageSize { get; set; } = 10; // 기본값 10
 
-
+        /// <summary>
+        /// 레코드 카운트 : 현재 테이블에 몇 개의 레코드가 있는지 지정
+        /// </summary>
         public int _RecordCount;
+
         [Category("페이징처리")]
         [Description("현재 테이블에 몇 개의 레코드가 있는지 지정")]
         public int RecordCount {
@@ -66,11 +69,22 @@ namespace BOARD_PROJECT.DotNetNote.Controls {
                         + Request.ServerVariables["SCRIPT_NAME"]
                         + "?Page="
                         + Convert.ToString(((PageIndex - 1) / (int)10) * 10)
-                        + "\"></a></li>";
+                        + "\">◀</a></li>";
                 }
             }
             else {
-                strPage += "<li class=\"disabled\"<a>◁</a></li>";
+                if (PageIndex!=1) {
+                    strPage += "<li><a href=\""
+                        + Request.ServerVariables["SCRIPT_NAME"]
+                        + "?Page="
+                        + Convert.ToString(PageIndex-1)
+                        + "\">◀</a></li>";
+
+                }
+                else {
+                    strPage += "<li class=\"disabled\"><a>◁</a></li>";
+
+                }
             }
             //가운데, 숫자 형식의 페이저 표시
             for (i = (((PageIndex-1)/(int)10)*10+1); 
@@ -103,7 +117,7 @@ namespace BOARD_PROJECT.DotNetNote.Controls {
             }
 
             // 다음 10개 링크
-            if (i < PageCount) //  다음 10개 링크가 있다면, ...
+            if (i <= PageCount) //  다음 10개 링크가 있다면, ...
             {
                 if (SearchMode) {
                     strPage += "<li><a href=\""
@@ -119,14 +133,14 @@ namespace BOARD_PROJECT.DotNetNote.Controls {
                         + Request.ServerVariables["SCRIPT_NAME"]
                         //+ "?BoardName=" + Request["BoardName"]
                         + "?Page="
-                        + Convert.ToString(((PageIndex - 1) / (int)10) * 10 + 11)
+                        + Convert.ToString(PageIndex + 1)
+                        //+ Convert.ToString(((PageIndex - 1) / (int)10) * 10 + 11)
                         + "\">▶</a></li>";
                 }
             }
             else {
                 strPage += "<li class=\"disabled\"><a>▷</a></li>";
             }
-
             // <!--이전 10개, 다음 10개 페이징 처리 종료-->
             strPage += "</ul>";
 

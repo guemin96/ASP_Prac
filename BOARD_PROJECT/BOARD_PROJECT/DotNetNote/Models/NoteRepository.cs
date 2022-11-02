@@ -114,14 +114,18 @@ namespace BOARD_PROJECT.DotNetNote.Models
             }
         }
         /// <summary>
-        /// 게시판 리스트
+        /// 게시판 리스트 : 페이지에 맞게 10개씩 데이터가 나옴
         /// </summary>
         /// <returns>페이지 번호</returns>
+       
         public List<Note> GetAll(int page)
         {
             try
             {
                 var parameters = new DynamicParameters(new { Page = page });
+
+                List<Note> test = con.Query<Note>("ListNotes", parameters, commandType: CommandType.StoredProcedure).ToList();
+
                 return con.Query<Note>("ListNotes", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
             catch (System.Exception ex)

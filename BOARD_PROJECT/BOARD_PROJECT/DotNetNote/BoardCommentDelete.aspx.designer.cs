@@ -7,12 +7,10 @@
 // </자동 생성됨>
 //------------------------------------------------------------------------------
 
-namespace BOARD_PROJECT.DotNetNote
-{
+namespace BOARD_PROJECT.DotNetNote {
 
 
-    public partial class BoardCommentDelete
-    {
+    public partial class BoardCommentDelete {
 
         /// <summary>
         /// txtPassword 컨트롤입니다.

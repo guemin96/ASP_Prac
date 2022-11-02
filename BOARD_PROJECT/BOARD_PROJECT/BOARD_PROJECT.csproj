@@ -173,10 +173,6 @@
     <Content Include="DotNetNote\Controls\BoardEditorFormControl.ascx" />
     <Content Include="DotNetNote\Controls\BoardSearchFormSingleControl.ascx" />
     <Content Include="DotNetNote\Default.aspx" />
-    <Content Include="DotNetNote\ImageDown.aspx" />
-    <Content Include="DotNetNote\ImageText.aspx" />
-    <Content Include="DotNetNote\ThumbNail.aspx" />
-    <Content Include="DotNetNote\BoardDown.aspx" />
     <Content Include="DotNetNote\BoardWrite.aspx" />
     <Content Include="DotNetNote\BoardView.aspx" />
     <Content Include="DotNetNote\BoardReply.aspx" />
@@ -184,6 +180,7 @@
     <Content Include="DotNetNote\BoardDelete.aspx" />
     <Content Include="DotNetNote\BoardCommentDelete.aspx" />
     <Content Include="DotNetNote\BoardList.aspx" />
+    <Content Include="DotNetNote\ImageText.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -291,13 +288,6 @@
     <Compile Include="DotNetNote\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DotNetNote\ImageDown.aspx.cs">
-      <DependentUpon>ImageDown.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DotNetNote\ImageDown.aspx.designer.cs">
-      <DependentUpon>ImageDown.aspx</DependentUpon>
-    </Compile>
     <Compile Include="DotNetNote\ImageText.aspx.cs">
       <DependentUpon>ImageText.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -311,20 +301,6 @@
     <Compile Include="DotNetNote\Models\NoteComment.cs" />
     <Compile Include="DotNetNote\Models\NoteCommentRepository.cs" />
     <Compile Include="DotNetNote\Models\NoteRepository.cs" />
-    <Compile Include="DotNetNote\ThumbNail.aspx.cs">
-      <DependentUpon>ThumbNail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DotNetNote\ThumbNail.aspx.designer.cs">
-      <DependentUpon>ThumbNail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DotNetNote\BoardDown.aspx.cs">
-      <DependentUpon>BoardDown.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DotNetNote\BoardDown.aspx.designer.cs">
-      <DependentUpon>BoardDown.aspx</DependentUpon>
-    </Compile>
     <Compile Include="DotNetNote\BoardWrite.aspx.cs">
       <DependentUpon>BoardWrite.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

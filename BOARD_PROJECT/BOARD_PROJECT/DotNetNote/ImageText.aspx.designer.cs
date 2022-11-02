@@ -7,12 +7,10 @@
 // </자동 생성됨>
 //------------------------------------------------------------------------------
 
-namespace BOARD_PROJECT.DotNetNote
-{
+namespace BOARD_PROJECT.DotNetNote {
 
 
-    public partial class ImageText
-    {
+    public partial class ImageText {
 
         /// <summary>
         /// form1 컨트롤입니다.

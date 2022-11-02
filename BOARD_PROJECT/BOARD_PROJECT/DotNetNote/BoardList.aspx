@@ -26,7 +26,7 @@
                     <asp:Literal ID="lblTotalRecord" runat="server"></asp:Literal>
                 </div>
                 <asp:GridView ID="ctlBoardList"
-                    runat="server" AutoGenerateColumns="False" DataKeyNames="Id"
+                    runat="server" AutoGenerateColumns="false" DataKeyNames="Id"
                     CssClass="table table-bordered table-hover table-condensed 
                         table-striped table-responsive">
                     <Columns>
@@ -44,7 +44,7 @@
                             ItemStyle-HorizontalAlign="Left"
                             HeaderStyle-Width="350px">
                             <ItemTemplate>
-                                <%# Dul.BoardLibrary.FuncStep(Eval("Step")) %>
+                                <%# Dul.BoardLibrary.FuncStep(Eval("Step")) %>      <%--Step => 답변깊이, 저장프로시저로 데이터를 들고 오는데 Step이라는 컬럼명을 가진 데이터를 가져오도록 설정--%>
                                 <asp:HyperLink ID="lnkTitle" runat="server"
                                     NavigateUrl=
                                     '<%# "BoardView.aspx?Id=" + Eval("Id") %>'>
@@ -53,7 +53,7 @@
                                 </asp:HyperLink>
                                 <%# Dul.BoardLibrary.ShowCommentCount(
                                     Eval("CommentCount")) %>
-                                <%# Dul.BoardLibrary.FuncNew(Eval("PostDate"))%>
+                                <%# Dul.BoardLibrary.FuncNew(Eval("PostDate"))%>    <%--PostDate => 작성일--%>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="파일"

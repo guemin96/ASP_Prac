@@ -66,16 +66,16 @@
                     <asp:Label ID="lblReadCount" Width="100%" runat="server">
                     </asp:Label>
                 </td>
-                <td class="text-right">파일 :
+                <td class="text-right"><%--파일 :--%>
                 </td>
                 <td>
-                    <asp:Label ID="lblFile" Width="100%" runat="server">
-                    </asp:Label>
+                    <%--<asp:Label ID="lblFile" Width="100%" runat="server">
+                    </asp:Label>--%>
                 </td>
             </tr>
             <tr>
                 <td colspan="4" style="padding: 10px;">
-                    <asp:Literal ID="ltrImage" runat="server"></asp:Literal>
+                    <%--<asp:Literal ID="ltrImage" runat="server"></asp:Literal>--%>
                     <asp:Label ID="lblContent" runat="server" 
                         Width="100%" Height="115px"></asp:Label>
                 </td>
@@ -104,7 +104,7 @@
         <asp:HyperLink ID="lnkReply" runat="server" 
             CssClass="btn btn-default">답변</asp:HyperLink>
         <asp:HyperLink ID="lnkList" runat="server" 
-            NavigateUrl="BoardList.aspx" 
+            
             CssClass="btn btn-default">리스트</asp:HyperLink>
     </div>
 

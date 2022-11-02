@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using BOARD_PROJECT.DotNetNote.Models;
 
 
@@ -10,9 +11,15 @@ namespace BOARD_PROJECT.DotNetNote
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //HttpCookie cookie = new HttpCookie("DotNetNote", (Int32.Parse(Request["Id"])/10+1).ToString());
+            //Response.Cookies.Add(cookie);
+
             lnkDelete.NavigateUrl = "BoardDelete.aspx?Id=" + Request["Id"];
             lnkModify.NavigateUrl = "BoardModify.aspx?Id=" + Request["Id"];
             lnkReply.NavigateUrl = "BoardReply.aspx?Id=" + Request["Id"];
+            if (Request["Id"]!= null) {
+                lnkList.NavigateUrl = "BoardList.aspx?Page=" + ((Int32.Parse(Request["Id"]) / 10)+1).ToString();
+            }
 
             _Id = Request.QueryString["Id"];
             if (_Id == null)
@@ -61,21 +68,21 @@ namespace BOARD_PROJECT.DotNetNote
             lblPostIP.Text = note.PostIp;
             if (note.FileName.Length > 1)
             {
-                lblFile.Text = String.Format(
-                    "<a href='./BoardDown.aspx?Id={0}'>"
-                    + "{1}{2} / 전송수: {3}</a>",
-                    note.Id,
-                    "<img src=\"/images/ext/ext_zip.gif\" border=\"0\">",
-                    note.FileName, note.DownCount);
-                if (Dul.BoardLibrary.IsPhoto(note.FileName))
-                {
-                    ltrImage.Text = "<img src=\'ImageDown.aspx?FileName="
-                        + $"{Server.UrlEncode(note.FileName)}\'>";
-                }
+                //lblFile.Text = String.Format(
+                //    "<a href='./BoardDown.aspx?Id={0}'>"
+                //    + "{1}{2} / 전송수: {3}</a>",
+                //    note.Id,
+                //    "<img src=\"/images/ext/ext_zip.gif\" border=\"0\">",
+                //    note.FileName, note.DownCount);
+                //if (Dul.BoardLibrary.IsPhoto(note.FileName))
+                //{
+                //    ltrImage.Text = "<img src=\'ImageDown.aspx?FileName="
+                //        + $"{Server.UrlEncode(note.FileName)}\'>";
+                //}
             }
             else
             {
-                lblFile.Text = "(업로드된 파일이 없습니다.)";
+                //lblFile.Text = "(업로드된 파일이 없습니다.)";
             }
         }
     }

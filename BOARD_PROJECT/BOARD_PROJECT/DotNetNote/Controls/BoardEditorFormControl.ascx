@@ -167,7 +167,8 @@
         <td colspan="2" style="text-align:center;">
             <asp:Button ID="btnWrite" runat="server" Text="저장" 
                 CssClass="btn btn-primary" OnClick="btnWrite_Click"></asp:Button> 
-            <a href="BoardList.aspx" class="btn btn-default">리스트</a>
+            <%--<a href="BoardList.aspx?Page=<%=(Int32.Parse(Request.QueryString["Id"])/10)+1%>" class="btn btn-default">리스트</a>--%>
+                <a href="../BoardList.aspx?Page=<%=(Int32.Parse(Request.QueryString["Id"])/10)+1%>" class="btn btn-default">리스트 </a>
             <br />
             <asp:ValidationSummary ID="valSummary" runat="server" 
                 ShowSummary="False" 
