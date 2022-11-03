@@ -19,7 +19,11 @@ namespace BOARD_ASP_CORE {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddSession();
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddControllersWithViews();
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +42,8 @@ namespace BOARD_ASP_CORE {
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(

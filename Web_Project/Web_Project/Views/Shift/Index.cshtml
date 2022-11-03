@@ -18,6 +18,8 @@
     const int Input_2_Num = 8;
     const int Input_3_Num = 9;
     const int ComfirmUser_Num = 10;
+    
+    
 
 }
 
@@ -175,24 +177,15 @@
                         <td style="text-align:left">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
                             <td>
-                                @if (DL[Input_1_Num].Equals("True")) {
-                                    <label class="chk_label"></label>
-                                }
-                                else {
-                                    <label class="chkNone_label"></label>
-                                }
-                                @if (DL[Input_2_Num].Equals("True")) {
-                                    <label class="chk_label"></label>
-                                }
-                                else {
-                                    <label class="chkNone_label"></label>
-                                }
-                                @if (DL[Input_3_Num].Equals("True")) {
-                                    <label class="chk_label"></label>
-                                }
-                                else {
-                                    <label class="chkNone_label"></label>
-                                }
+                                @(
+                                    DL[Input_1_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" })
+                                 )
+                                @(
+                                    DL[Input_2_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" })
+                                 )
+                                @(
+                                    DL[Input_3_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" })
+                                 )
 
                             </td>
                         }
@@ -209,28 +202,17 @@
                         <td style="text-align:left">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
                             <td >
-                                @if (DL[Input_1_Num].Equals("True")) {
-                                    <label class="chk_label"></label>
-
-                                }
-                                else {
-                                   <label class="chkNone_label"></label>
-                                }
-                                @if (DL[Input_2_Num].Equals("True")) {
-                                    <label class="chk_label"></label>
-
-                                }
-                                else {
-                                    <label class="chkNone_label"></label>
-
-                                }
-                                
+                               
+                                @(
+                                    DL[Input_1_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" })
+                                 )
+                                @(
+                                    DL[Input_2_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" })
+                                 )
                             </td>
                         }
-                       
                     </tr>
                 }
-                
                 else if (Chk1_F.Contains(Int32.Parse(TempDr[1].ToString()))) {
                     <tr >
                         @{
@@ -259,12 +241,8 @@
                         <td style ="text-align:left">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
                             <td>
-                                @if (DL[Input_1_Num].Equals("True")) {
-                                    <label class="chk_label"></label>
-                                }
-                                else {
-                                    <label class="chkNone_label"></label>
-                                }
+                                @(
+                                    DL[Input_1_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" }))
                             </td>
                         }
                        
@@ -280,12 +258,14 @@
                         <td style="text-align:left">@TempDr["CheckBody"]</td>
                         @foreach (var DL in DataList) {
                             <td class="text-align-center">
-                                @if (DL[Input_1_Num].Equals("True")) {
+                                @(
+                                    DL[Input_1_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" }))
+                                @*@if (DL[Input_1_Num].Equals("True")) {
                                         <label class="chk_label"></label>
                                 }
                                 else {
                                         <label class="chkNone_label"></label>
-                                }
+                                }*@
                             </td>
                         }
                     </tr>
