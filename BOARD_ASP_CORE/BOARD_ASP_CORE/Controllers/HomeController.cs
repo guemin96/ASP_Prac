@@ -7,6 +7,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace BOARD_ASP_CORE.Controllers {
     public class HomeController : Controller {
@@ -22,11 +23,6 @@ namespace BOARD_ASP_CORE.Controllers {
 
         public IActionResult Index() {
 
-            //if (HttpContext.Session.GetString("USER_LOGIN_KEY")==null) {
-
-            //}
-
-
             return View();
         }
 
@@ -37,6 +33,7 @@ namespace BOARD_ASP_CORE.Controllers {
         public IActionResult Login() {
             return View();
         }
+
         [HttpPost]
         public IActionResult Login(string UserId, string UserPassword) {
 
@@ -46,7 +43,7 @@ namespace BOARD_ASP_CORE.Controllers {
                     con.Open();
                 }
 
-                string query = "select Id,Password from TB_User where @Id=";
+                string query = "select * from TB_User where Id=@Id and Password=@Password";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = UserId;
                 cmd.Parameters.Add("@Password",SqlDbType.NVarChar).Value = UserPassword;
@@ -54,23 +51,53 @@ namespace BOARD_ASP_CORE.Controllers {
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
-
-                var user = dt.AsEnumerable().FirstOrDefault(u => u[0].Equals(UserId) &&
-                                                                 u[1].Equals(UserPassword));
-                if (user != null) {
-                    HttpContext.Session.SetString("USER_LOGIN_KEY", user[0].ToString());
+                
+                if (dt.Rows.Count!=0) {
+                    HttpContext.Session.SetInt32("USER_LOGIN_KEY", Int32.Parse(dt.Rows[0]["Num"].ToString()) );
 
                     return RedirectToAction("Index", "Home");
                 }
-
-
             }
-            
-            
-
-
             return View();
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("USER_LOGIN_KEY");
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Register(string UserId, string UserPassword)
+        {
+            if (UserId != null && UserPassword != null)
+            {
+                string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+                using (con = new SqlConnection(conquery))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    string query = "insert into TB_User (Id,Password) values (@ID,@Password)";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = UserId;
+                    cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = UserPassword;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                }
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {

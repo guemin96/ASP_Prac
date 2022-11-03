@@ -25,12 +25,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (Context.Session.GetString("USER_LOGIN_KEY")==null) {
+                        @if (Context.Session.GetInt32("USER_LOGIN_KEY")==null) {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">회원가입</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">회원가입</a>
                             </li>
                         }
                         else {
