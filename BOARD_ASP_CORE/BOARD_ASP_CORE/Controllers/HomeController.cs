@@ -19,7 +19,6 @@ namespace BOARD_ASP_CORE.Controllers {
             _logger = logger;
         }
 
-        private readonly IConfiguration _configuration;
 
         public IActionResult Index() {
 
