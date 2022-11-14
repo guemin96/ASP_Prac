@@ -5,16 +5,42 @@
 @{
     var dtList = Model.Tables[0];
 
+    var startPage = ViewBag.StartPage;
+    var endPage = ViewBag.EndPage;
+    var totalPage = ViewBag.TotalPage;
+    var page = ViewBag.Page;
+
+
 }
 
 <head>
-
+    <style>
+        table{
+            width : 100%
+        }
+        
+        th{
+            text-align:center
+        }
+        td{
+            text-align:center
+        }
+        .out{
+            width: 100%;
+            text-align: center;
+        }
+        .in{
+            display: inline-block;
+            text-align: center;
+        }
+        
+    </style>
 </head>
 <body>
     <div>
-        <p>글쓰기</p>
+        <p>게시판</p>
     </div>
-    <table>
+    <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
@@ -27,11 +53,45 @@
             @foreach (DataRow item in dtList.Rows) {
                 <tr>
                     <td>@item["Id"]</td>
-                    <td>@item["Title"]</td>
+                    <td width="50%"><a href="@Url.Action("BoardDetail","Board", new {num=item["Id"]})">@item["Title"]</a></td>
                     <td>@item["ReadCount"]</td>
                     <td>@item["PostDate"]</td>
                 </tr>
             }
         </tbody>
     </table>
+    
+    <div style="text-align:right;">
+        <form asp-controller="Board" asp-action="CreateBoard" method="get">
+            <button type="submit" >글쓰기</button>
+
+        </form>
+    </div>
+    <div class="out" >
+        <div class="in">
+            <div>
+                @if (startPage > 1) {
+                    <a href="?page=1">[처음 페이지]</a>
+                }
+                @if (page > 1) {
+                    <a href="?page=@(page-1)">[이전 페이지]</a>
+                }
+                @for (int icount = startPage; icount <= endPage; icount++) {
+                    if (icount == page) {
+                        <a href="?page=@icount" style="color:red;">@icount</a>
+                    }
+                    else {
+                        <a href="?page=@icount">@icount</a>
+                    }
+                }
+                @if (page < totalPage) {
+                    <a href="?page=@(page+1)">[다음 페이지]</a>
+                }
+                @if (endPage < totalPage) {
+                    <a href="?page=@totalPage">[마지막 페이지]</a>
+                }
+            </div>
+        </div>
+    </div>
+   
 </body>

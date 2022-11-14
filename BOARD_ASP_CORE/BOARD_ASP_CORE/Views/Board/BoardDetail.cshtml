@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using System.Data;
+@using Microsoft.AspNetCore.Http
+@{
+    var dtDetail = Model;
+}
+<head>
+
+</head>
+<body>
+        <p> 게시판 글 상세보기 </p>
+        <div>
+            작성자 : @dtDetail.Rows[0]["Name"] />
+        </div>
+        <div>
+            제목 : @dtDetail.Rows[0]["Title"] /><br />
+        </div>
+
+        <div>
+            내용 : @dtDetail.Rows[0]["Content"]" />
+        </div>
+        <div>
+            @if (dtDetail.Rows[0]["UserId"].ToString() == Context.Session.GetInt32("USER_LOGIN_KEY").ToString()) {
+                <a href="@Url.Action("UpdateBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">수정</a>
+                <a href="@Url.Action("UpdateBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">삭제</a>
+            }
+            <a href="@Url.Action("BoardList","Board",new{page = 1})">뒤로</a>
+        </div>
+</body>

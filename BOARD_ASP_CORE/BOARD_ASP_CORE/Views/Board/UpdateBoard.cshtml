@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using System.Data;
+@using Microsoft.AspNetCore.Http
+@{
+    var dtData = Model;
+
+}
+
+<head>
+
+</head>
+<body>
+    <form asp-controller="Board" asp-action="UpdateBoard" method="post">
+        <p> 게시판 글수정 </p>
+        <div>
+            번호 : <input id="id" name="id" value="@dtData.Rows[0]["Id"]" readonly />
+        </div>
+        <div>
+            작성자 : <input type="text" id="name" name="name" value="@dtData.Rows[0]["Name"]" />
+        </div>
+        <div>
+            제목 : <input type="text" id="title" name="title" value="@dtData.Rows[0]["Title"]"  /><br />
+        </div>
+
+        <div>
+            내용 : <input type="text" id="content" name="content" style="width:300px; height:300px;margin-top:5px;" value="@dtData.Rows[0]["Content"]"  />
+        </div>
+        <button type="submit">수정</button>
+        <a href="@Url.Action("BoardList","Board",new{page=1})">뒤로</a>
+    </form>
+</body>
