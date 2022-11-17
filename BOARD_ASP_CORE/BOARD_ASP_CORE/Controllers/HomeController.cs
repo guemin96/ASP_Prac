@@ -13,6 +13,7 @@ namespace BOARD_ASP_CORE.Controllers {
     public class HomeController : Controller {
         private readonly ILogger<HomeController> _logger;
         private SqlConnection con;
+        string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
 
 
         public HomeController(ILogger<HomeController> logger) {
@@ -34,9 +35,8 @@ namespace BOARD_ASP_CORE.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Login(string UserId, string UserPassword) {
+        public IActionResult Login(UserM model) {
 
-            string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
             using (con = new SqlConnection(conquery)) {
                 if (con.State == ConnectionState.Closed) {
                     con.Open();
@@ -44,8 +44,8 @@ namespace BOARD_ASP_CORE.Controllers {
 
                 string query = "select * from TB_User where Id=@Id and Password=@Password";
                 SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = UserId;
-                cmd.Parameters.Add("@Password",SqlDbType.NVarChar).Value = UserPassword;
+                cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = model.Id;
+                cmd.Parameters.Add("@Password",SqlDbType.NVarChar).Value = model.Password;
                 cmd.CommandType = CommandType.Text;
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -70,28 +70,35 @@ namespace BOARD_ASP_CORE.Controllers {
             return View();
         }
         [HttpPost]
-        public IActionResult Register(string UserId, string UserPassword)
+        public IActionResult Register(UserM model)
         {
-            if (UserId != null && UserPassword != null)
-            {
-                string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
-                using (con = new SqlConnection(conquery))
-                {
-                    if (con.State == ConnectionState.Closed)
-                    {
-                        con.Open();
+            if (ModelState.IsValid) {
+                if (model.Password == model.ChkPassword) {
+                    using (con = new SqlConnection(conquery)) {
+                        if (con.State == ConnectionState.Closed) {
+                            con.Open();
+                        }
+                        string query = "insert into TB_User (Id,Password,Name,Gender,Birthday,Email,Phone,Address) values (@ID,@Password,@Name,@Gender,@Birthday,@Email,@Phone,@Address)";
+                        SqlCommand cmd = new SqlCommand(query, con);
+                        cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = model.Id;
+                        cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = model.Password;
+                        cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = model.Name;
+                        cmd.Parameters.Add("@Gender", SqlDbType.NVarChar).Value = model.Gender;
+                        cmd.Parameters.Add("@Birthday", SqlDbType.NVarChar).Value = model.Birthday;
+                        cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value =  String.IsNullOrEmpty(model.Email)? "":model.Email;
+                        cmd.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = String.IsNullOrEmpty(model.Phone) ? "" : model.Phone;
+                        cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = model.Address;
+
+                        cmd.CommandType = CommandType.Text;
+                        cmd.ExecuteNonQuery();
                     }
-                    string query = "insert into TB_User (Id,Password) values (@ID,@Password)";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = UserId;
-                    cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = UserPassword;
-                    cmd.CommandType = CommandType.Text;
-                    cmd.ExecuteNonQuery();
+                    return RedirectToAction("Login", "Home");
                 }
-                return RedirectToAction("Login", "Home");
+                else {
+                    return View();
+                }
             }
-            else
-            {
+            else {
                 return View();
             }
         }

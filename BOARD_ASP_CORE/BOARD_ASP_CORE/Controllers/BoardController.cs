@@ -115,7 +115,17 @@ namespace BOARD_ASP_CORE.Controllers {
             DataTable dt = new DataTable();
 
             using (SqlConnection con = new SqlConnection(conquery)) {
-                if (con.State== System.Data.ConnectionState.Closed) {
+                if (con.State == ConnectionState.Closed) {
+                    con.Open();
+                }
+                string query = $"Update TB_Notes set ReadCount=ReadCount+1 where Id = {num}";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            using (SqlConnection con = new SqlConnection(conquery)) {
+                if (con.State == System.Data.ConnectionState.Closed) {
                     con.Open();
                 }
                 string query = $"Select * from TB_Notes where Id={num}";
@@ -175,6 +185,22 @@ namespace BOARD_ASP_CORE.Controllers {
             }
             return RedirectToAction("BoardList", "Board");
 
+        }
+        public IActionResult DeleteBoard(int num) {
+
+            using (SqlConnection con = new SqlConnection(conquery)) {
+                if (con.State == ConnectionState.Closed) {
+                    con.Open();
+                }
+                string conquery = $"delete from TB_Notes where Id = {num}";
+                SqlCommand cmd = new SqlCommand(conquery, con);
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+
+            return RedirectToAction("BoardList", "Board");
         }
     }
 }

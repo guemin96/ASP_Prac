@@ -5,25 +5,69 @@
 }
 
 
-<div class="text-center">
+<head>
+    
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-6 d-md-flex align-items-center justify-content-center bg-primary" style="height:70vh !important;">
+                <div class="p-3 p-lg-5">
+                    <div class="text-center">
+                        <h2>Welcome to GYUMIN's Board</h2>
+                        <p></p>
+                    </div>
 
+                </div>
 
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+            </div>
+            <div class="col-12 col-lg-6 m-auto">
+                <div class="row my-5">
+                    <div class="col-sm-10 col-xl-8 m-auto">
+                        <h1>Login</h1>
+                        <form method="post" action="/Home/Login">
+                            <div class="mb-4">
+                                <label > 아이디 : </label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-light rounded border-0 text-secondary px-3"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="text" placeholder="사용자 아이디 입력" class="form-control border-0 bg-light rounded" id="id" name="id" />
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label> 비밀번호 :</label> 
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-light rounded border-0 text-secondary px-3"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" placeholder="사용자 비밀번호 입력" class="form-control border-0 bg-light rounded" id="Password" name="Password" />
+                                </div>
+                            </div>
+                            <div class="align-items-center mt-0">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success mb-0">로그인</button>
+                                </div>
+                            </div>
 
-<div>
-    <form method="post" action="/Home/Login">
-        <div>
-            로그인 :
-            <input type="text" placeholder="사용자 아이디 입력" id="UserId" name="UserId" />
+                        </form>
+                        <div class="row justify-content-center">
+                            <!-- Divider with text -->
+                            <div class="position-relative">
+                                <hr />
+                                <p class="text-center">Or</p>
+                            </div>
+                            <!-- Social btn -->
+                        </div>
+
+                        <!-- Sign up link -->
+                        <div class="text-center">
+                            <span>Don't have an account? <a href="@Url.Action("Register","Home")">회원가입</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            비밀번호 :
-            <input type="password" placeholder="사용자 비밀번호 입력" id="UserPassword" name="UserPassword" />
-        </div>
-        <button type="submit" class="btn btn-success">로그인</button>
+    </div>
+    <div>
+        
+    </div>
 
-    </form>
-</div>
+</body>
 
