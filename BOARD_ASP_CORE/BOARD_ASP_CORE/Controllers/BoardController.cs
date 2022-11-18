@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BOARD_ASP_CORE.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -24,7 +25,7 @@ namespace BOARD_ASP_CORE.Controllers {
                 if (con.State == System.Data.ConnectionState.Closed) {
                     con.Open();
                 }
-                string query = "select count(*) from Notes";
+                string query = "select count(*) from TB_Notes";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.CommandType = CommandType.Text;
                 totalCount = Convert.ToInt32(cmd.ExecuteScalar()); 
@@ -86,9 +87,8 @@ namespace BOARD_ASP_CORE.Controllers {
             }
         }
         [HttpPost]
-        public IActionResult CreateBoard(string name,string title, string content) {
-
-            if (title!=null&&content!=null) {
+        public IActionResult CreateBoard(NoteM model) {
+            if (ModelState.IsValid) {
 
                 DateTime nowDate = DateTime.Now.Date;
 
@@ -97,13 +97,15 @@ namespace BOARD_ASP_CORE.Controllers {
                     if (con.State == System.Data.ConnectionState.Closed) {
                         con.Open();
                     }
-                    SqlCommand cmd = new SqlCommand("NEW_Insert_Note", con);
-                    cmd.Parameters.Add("@vcName", SqlDbType.NVarChar).Value = name;
-                    cmd.Parameters.Add("@vcTitle", SqlDbType.NVarChar).Value = title;
+                    string conquery = "insert into TB_Notes (UserId,Name,Title,PostDate,Content,ReadCount) values (@IUserId,@vcName,@vcTitle,@dtPostDate,@txContent,@iReadCount)";
+                    SqlCommand cmd = new SqlCommand(conquery, con);
+                    cmd.Parameters.Add("@IUserId", SqlDbType.Int).Value = HttpContext.Session.GetInt32("USER_LOGIN_KEY").Value;
+                    cmd.Parameters.Add("@vcName", SqlDbType.NVarChar).Value = model.Name;
+                    cmd.Parameters.Add("@vcTitle", SqlDbType.NVarChar).Value = model.Title;
                     cmd.Parameters.Add("@dtPostDate", SqlDbType.DateTime).Value = nowDate;
-                    cmd.Parameters.Add("@txContent", SqlDbType.Text).Value = content;
+                    cmd.Parameters.Add("@txContent", SqlDbType.Text).Value = model.Content;
                     cmd.Parameters.Add("@iReadCount", SqlDbType.Int).Value = 0;
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
 
                     con.Close();
@@ -125,7 +127,7 @@ namespace BOARD_ASP_CORE.Controllers {
                 con.Close();
             }
             using (SqlConnection con = new SqlConnection(conquery)) {
-                if (con.State == System.Data.ConnectionState.Closed) {
+                if (con.State == ConnectionState.Closed) {
                     con.Open();
                 }
                 string query = $"Select * from TB_Notes where Id={num}";
@@ -161,23 +163,24 @@ namespace BOARD_ASP_CORE.Controllers {
 
         }
         [HttpPost]
-        public IActionResult UpdateBoard(string id,string name, string title, string content) {
-            if (id!=null && title != null && content != null) {
+        public IActionResult UpdateBoard(NoteM model) {
+            if (ModelState.IsValid) {
 
                 DateTime nowDate = DateTime.Now.Date;
 
                 //string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
                 using (SqlConnection con = new SqlConnection(conquery)) {
-                    if (con.State == System.Data.ConnectionState.Closed) {
+                    if (con.State == ConnectionState.Closed) {
                         con.Open();
                     }
-                    SqlCommand cmd = new SqlCommand("NEW_Update_Note", con);
-                    cmd.Parameters.Add("@IId", SqlDbType.Int).Value = id;
-                    cmd.Parameters.Add("@vcName", SqlDbType.NVarChar).Value = name;
-                    cmd.Parameters.Add("@vcTitle", SqlDbType.NVarChar).Value = title;
+                    string conquery = "Update TB_Notes set Name = @vcName, Title = @vcTitle, PostDate = @dtPostDate, Content = @txContent where Id=@IId";
+                    SqlCommand cmd = new SqlCommand(conquery, con);
+                    cmd.Parameters.Add("@IId", SqlDbType.Int).Value = model.Id;
+                    cmd.Parameters.Add("@vcName", SqlDbType.NVarChar).Value = model.Name;
+                    cmd.Parameters.Add("@vcTitle", SqlDbType.NVarChar).Value = model.Title;
                     cmd.Parameters.Add("@dtPostDate", SqlDbType.DateTime).Value = nowDate;
-                    cmd.Parameters.Add("@txContent", SqlDbType.Text).Value = content;
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@txContent", SqlDbType.Text).Value = model.Content;
+                    cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
 
                     con.Close();

@@ -9,37 +9,34 @@
 
 </head>
 <body>
-    <div class="page-content-wrapper border">
-        <h2 class="mb-3">게시판 작성하기</h2>
-        <form class="row g-3" asp-controller="Board" asp-action="CreateBoard" method="post">
-            
-            <div class="col-12">
-                <div class="row g-xl-0 align-items-center">
-                    <div class="col-lg-4">
-                        <h6 class="mb-lg-0">제목 : <span class="text-danger"></span></h6>
-                    </div>
-                    <div class="col-lg-8" style="margin-left:-290px;">
-                        <input type="text" class="form-control" id="name" name="name" />
+    <div class="mt-5 pt-5">
+        <div class="container-fluid">
+            <h1> 게시판 작성하기</h1>
+            <form class="row g-3" asp-controller="Board" asp-action="CreateBoard" method="post" enctype="multipart/form-data" >
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3 mt-3">
+                            <label class="col-form-label">작성자</label>
+                            <input type="text" class="form-control" id="name" name="name"/>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label class="col-form-label">제목</label>
+                            <input type="text" class="form-control" id="title" name="title" />
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label class="col-form-label">내용</label>
+                            <textarea class="form-control editor" rows="20" id="Content" name="Content" placeholder="본문 내용"></textarea>
+                            @*<input type="text" class="form-control editor" style="height:300px;margin-top:5px;" id="content" name="content" placeholder="본문 내용" />*@
+                        </div>
+                        
+                        <div class="class=" mb-3 mt-3">
+                            <button type="submit" class="btn btn-primary mb-0">저장</button>
+                            <a class="btn btn-success" href="@Url.Action("BoardList","Board")">목록</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <div class="row g-xl-0 ">
-                    <div class="col-lg-4">
-                        <h6 class="mb-lg-0">본문 <span class="text-danger"></span></h6>
-                    </div>
-                    <div class="col-lg-8" style="margin-left:-290px;">
-                        <input type="text" class="form-control" style="height:400px;" id="content" name="content" placeholder="본문 내용" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 text-sm-end" style="margin-left: -290px;">
-                <button type="submit" class="btn btn-primary mb-0">저장</button>
-                <a class="btn btn-success" href="@Url.Action("BoardList","Board")">목록</a>
-            </div>
-            
-        </form>
+            </form>
 
+        </div>
     </div>
-    
 </body>

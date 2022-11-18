@@ -1,7 +1,7 @@
 USE [DotNetNote]
 GO
 
-/****** Object:  Table [dbo].[TB_User]    Script Date: 2022-11-17 오후 5:14:20 ******/
+/****** Object:  Table [dbo].[TB_User]    Script Date: 2022-11-18 오후 1:19:41 ******/
 SET ANSI_NULLS ON
 GO
 
