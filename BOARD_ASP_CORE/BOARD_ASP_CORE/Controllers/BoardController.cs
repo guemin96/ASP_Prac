@@ -202,7 +202,6 @@ namespace BOARD_ASP_CORE.Controllers {
                 con.Close();
 
             }
-
             return RedirectToAction("BoardList", "Board");
         }
     }
