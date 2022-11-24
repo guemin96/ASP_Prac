@@ -13,11 +13,19 @@ namespace BOARD_ASP_CORE.Controllers {
     public class HomeController : Controller {
         private readonly ILogger<HomeController> _logger;
         private SqlConnection con;
-        string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+        //string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+        string conquery = string.Empty;
+
+        private readonly IConfiguration configuration;
+        public IDbConnection dbConnection { get;}
 
 
-        public HomeController(ILogger<HomeController> logger) {
+
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration) {
             _logger = logger;
+            this.configuration = configuration;
+            this.dbConnection = new SqlConnection(this.configuration.GetConnectionString("ConnectionString"));
+            conquery = dbConnection.ConnectionString;
         }
 
 

@@ -5,16 +5,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BOARD_ASP_CORE.DataContext {
     public class AspNetCoreMVCStudyDbContext :DbContext {
-        
-        private readonly IConfiguration _configuration;
+        //사용 안함
+        //private readonly IConfiguration _configuration;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            string test = _configuration.GetConnectionString("ConnectionString");
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        //    string test = _configuration.GetConnectionString("ConnectionString");
 
-            optionsBuilder.UseSqlServer(test);
-        }
-        
-
-        
+        //    optionsBuilder.UseSqlServer(test);
+        //}
     }
 }

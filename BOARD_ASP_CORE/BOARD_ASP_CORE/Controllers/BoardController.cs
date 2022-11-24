@@ -1,8 +1,10 @@
-﻿using BOARD_ASP_CORE.Models;
+﻿using BOARD_ASP_CORE.DataContext;
+using BOARD_ASP_CORE.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Data;
 using System.Reflection.Metadata;
@@ -10,7 +12,20 @@ using System.Xml.Linq;
 
 namespace BOARD_ASP_CORE.Controllers {
     public class BoardController : Controller {
-        string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+        //string conquery = string.Empty;//"Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+
+        private readonly IConfiguration configuration; 
+        private IDbConnection dbConnection { get; }
+        string conquery = string.Empty;
+
+
+        public BoardController(IConfiguration configuration) {
+            this.configuration = configuration;
+            dbConnection = new SqlConnection(this.configuration.GetConnectionString("ConnectionString"));   
+            conquery = dbConnection.ConnectionString;
+        }
+
+        
         public IActionResult Index() {
             return View();
         }

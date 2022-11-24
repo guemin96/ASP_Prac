@@ -1,6 +1,8 @@
+using BOARD_ASP_CORE.DataContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +24,7 @@ namespace BOARD_ASP_CORE {
             services.AddSession();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddControllersWithViews();
-            
+            //services.AddDbContext<AspNetCoreMVCStudyDbContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("ConnectionString")));
 
         }
 
