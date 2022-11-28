@@ -5,9 +5,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Reflection.Metadata;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace BOARD_ASP_CORE.Controllers {
@@ -218,6 +222,62 @@ namespace BOARD_ASP_CORE.Controllers {
 
             }
             return RedirectToAction("BoardList", "Board");
+        }
+
+        public async Task<JsonResult> FileUpload(IList<IFormFile> files) {
+            int result = -1;
+            string uploadDir = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images")).ToString();
+            try {
+                foreach (var formFile in files) {
+                    if (formFile.Length > 0) {
+                        var fileFullPath = uploadDir + formFile.FileName;
+
+                        int filecnt = 1;
+                        string newFilename = string.Empty;
+                        while (new FileInfo(fileFullPath).Exists) {
+                            var idx = formFile.FileName.LastIndexOf('.');
+                            var tmp = formFile.FileName.Substring(0, idx);
+                            newFilename = tmp + String.Format("({0})", filecnt++) + formFile.FileName.Substring(idx);
+                            fileFullPath = uploadDir + newFilename;
+                        }
+                        using (var stream = new FileStream(fileFullPath, FileMode.CreateNew)) {
+                            await formFile.CopyToAsync(stream);
+                        }
+                    }
+                }
+                result = 0;
+            }
+            catch (Exception ex) {
+
+                throw ex;
+            }
+            return Json(new {result = result});
+        }
+        public IActionResult UploadFiles(List<IFormFile> files) {
+            var uploadPath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images")).ToString();
+            var response = "";
+            var count = 0;
+
+            try {
+                files.ForEach(file => {
+                    var filePath = Path.Combine(uploadPath, file.Name);
+                    var k = 1;
+                    while (System.IO.File.Exists(filePath)) {
+                        var name = file.FileName.Substring(0, file.FileName.LastIndexOf("."));
+                        var ext = file.FileName.Substring(file.FileName.LastIndexOf(".") + 1);
+                        filePath = Path.Combine(uploadPath, $"{name}({k++}).{ext}");
+                    }
+                    using (var uploadFile = System.IO.File.Create(filePath)) {
+                        file.CopyTo(uploadFile);
+                    }
+                    count++;
+                });
+                response = $"{count} files are uploaded.";
+            }
+            catch (Exception ex) {
+                response = ex.Message;
+            }
+            return Json(response);
         }
     }
 }
