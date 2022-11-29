@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 
@@ -14,6 +17,8 @@ namespace BOARD_ASP_CORE.Models {
         public DateTime PostDate { get; set; }
         [Required]
         public string Content { get; set; }
+        public List<IFormFile> uploadFile { get; set; }
+
 
     }
 }

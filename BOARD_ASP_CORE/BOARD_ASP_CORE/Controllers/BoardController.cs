@@ -9,6 +9,7 @@ using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
@@ -110,13 +111,30 @@ namespace BOARD_ASP_CORE.Controllers {
             if (ModelState.IsValid) {
 
                 DateTime nowDate = DateTime.Now.Date;
+                List<string> filenames = new List<string>();
+                try {
+                    string wwwPath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images");
+
+                    foreach (IFormFile item in model.uploadFile) {
+                        string fileName = Path.GetFileName(item.FileName);
+                        using (FileStream stream = new FileStream(Path.Combine(wwwPath,item.FileName),FileMode.Create)) {
+                            item.CopyTo(stream);
+                            filenames.Add(fileName);
+
+                        }
+                    }
+                }
+                catch (Exception ex) {
+
+                    throw;
+                }
 
                 //string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
                 using (SqlConnection con = new SqlConnection(conquery)) {
                     if (con.State == System.Data.ConnectionState.Closed) {
                         con.Open();
                     }
-                    string conquery = "insert into TB_Notes (UserId,Name,Title,PostDate,Content,ReadCount) values (@IUserId,@vcName,@vcTitle,@dtPostDate,@txContent,@iReadCount)";
+                    string conquery = "insert into TB_Notes (UserId,Name,Title,PostDate,Content,ReadCount,FileName) values (@IUserId,@vcName,@vcTitle,@dtPostDate,@txContent,@iReadCount,@vcFileNames)";
                     SqlCommand cmd = new SqlCommand(conquery, con);
                     cmd.Parameters.Add("@IUserId", SqlDbType.Int).Value = HttpContext.Session.GetInt32("USER_LOGIN_KEY").Value;
                     cmd.Parameters.Add("@vcName", SqlDbType.NVarChar).Value = model.Name;
@@ -124,6 +142,15 @@ namespace BOARD_ASP_CORE.Controllers {
                     cmd.Parameters.Add("@dtPostDate", SqlDbType.DateTime).Value = nowDate;
                     cmd.Parameters.Add("@txContent", SqlDbType.Text).Value = model.Content;
                     cmd.Parameters.Add("@iReadCount", SqlDbType.Int).Value = 0;
+                    string strfilenames = filenames[0];
+
+                    for (int i = 1; i < filenames.Count; i++) {
+                        strfilenames = filenames[i]+"*"+strfilenames;
+                    }
+                    //foreach (var item in filenames) {
+                    //    strfilenames = item + "*" + strfilenames;  
+                    //}
+                    cmd.Parameters.Add("@vcFileNames",SqlDbType.NVarChar).Value = strfilenames;
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
 
@@ -224,60 +251,11 @@ namespace BOARD_ASP_CORE.Controllers {
             return RedirectToAction("BoardList", "Board");
         }
 
-        public async Task<JsonResult> FileUpload(IList<IFormFile> files) {
-            int result = -1;
-            string uploadDir = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images")).ToString();
-            try {
-                foreach (var formFile in files) {
-                    if (formFile.Length > 0) {
-                        var fileFullPath = uploadDir + formFile.FileName;
+        public FileResult FileDownload(string filename) {
+            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+ "\\" + filename;
+            byte[] bytes = System.IO.File.ReadAllBytes(filepath);
 
-                        int filecnt = 1;
-                        string newFilename = string.Empty;
-                        while (new FileInfo(fileFullPath).Exists) {
-                            var idx = formFile.FileName.LastIndexOf('.');
-                            var tmp = formFile.FileName.Substring(0, idx);
-                            newFilename = tmp + String.Format("({0})", filecnt++) + formFile.FileName.Substring(idx);
-                            fileFullPath = uploadDir + newFilename;
-                        }
-                        using (var stream = new FileStream(fileFullPath, FileMode.CreateNew)) {
-                            await formFile.CopyToAsync(stream);
-                        }
-                    }
-                }
-                result = 0;
-            }
-            catch (Exception ex) {
-
-                throw ex;
-            }
-            return Json(new {result = result});
-        }
-        public IActionResult UploadFiles(List<IFormFile> files) {
-            var uploadPath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images")).ToString();
-            var response = "";
-            var count = 0;
-
-            try {
-                files.ForEach(file => {
-                    var filePath = Path.Combine(uploadPath, file.Name);
-                    var k = 1;
-                    while (System.IO.File.Exists(filePath)) {
-                        var name = file.FileName.Substring(0, file.FileName.LastIndexOf("."));
-                        var ext = file.FileName.Substring(file.FileName.LastIndexOf(".") + 1);
-                        filePath = Path.Combine(uploadPath, $"{name}({k++}).{ext}");
-                    }
-                    using (var uploadFile = System.IO.File.Create(filePath)) {
-                        file.CopyTo(uploadFile);
-                    }
-                    count++;
-                });
-                response = $"{count} files are uploaded.";
-            }
-            catch (Exception ex) {
-                response = ex.Message;
-            }
-            return Json(response);
+            return File(bytes,"application/octet-stream",filename);
         }
     }
 }

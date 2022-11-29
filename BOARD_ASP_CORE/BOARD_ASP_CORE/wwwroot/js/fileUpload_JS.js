@@ -95,26 +95,26 @@
 //        });
 //}
 //uploadButton
-$(function () {
-    $("#uploadButton").click(function () {
-        if ($("#uploadFile").val() === "") {
-            alert("File is empty.");
-            return;
-        }
-        var formData = new FormData();
-        $.each(document.querySelector("#uploadFile").files, function (i, item) {
-            formData.append("files", item);
-        });
-        $.ajax({
-            type: "POST",
-            url: "Board/UploadFiles",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                if (data === "Success") $("#uploadFile").val("");
-                else alert(data);
-            }
-        })
-    });
-});
+//$(function () {
+//    $("#uploadButton").click(function () {
+//        if ($("#uploadFile").val() === "") {
+//            alert("File is empty.");
+//            return;
+//        }
+//        var formData = new FormData();
+//        $.each(document.querySelector("#uploadFile").files, function (i, item) {
+//            formData.append("files", item);
+//        });
+//        $.ajax({
+//            type: "POST",
+//            url: "Board/UploadFiles",
+//            data: formData,
+//            processData: false,
+//            contentType: false,
+//            success: function (data) {
+//                if (data === "Success") $("#uploadFile").val("");
+//                else alert(data);
+//            }
+//        })
+//    });
+//});
