@@ -40,6 +40,7 @@ namespace BOARD_ASP_CORE.Controllers {
             int totalCount = 0;
             DataSet ds = new DataSet();
 
+            #region 페이징 설정
 
             using (SqlConnection con = new SqlConnection(conquery)) {
                 if (con.State == System.Data.ConnectionState.Closed) {
@@ -93,7 +94,7 @@ namespace BOARD_ASP_CORE.Controllers {
                 ds.Tables.Add(dt);
                 con.Close();
             }
-
+            #endregion
             return View(ds);
         }
         [HttpGet]
@@ -111,6 +112,8 @@ namespace BOARD_ASP_CORE.Controllers {
             if (ModelState.IsValid) {
 
                 DateTime nowDate = DateTime.Now.Date;
+
+                #region file 저장
                 List<string> filenames = new List<string>();
                 try {
                     string wwwPath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images");
@@ -128,6 +131,7 @@ namespace BOARD_ASP_CORE.Controllers {
 
                     throw;
                 }
+                #endregion
 
                 //string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
                 using (SqlConnection con = new SqlConnection(conquery)) {
@@ -187,6 +191,7 @@ namespace BOARD_ASP_CORE.Controllers {
 
             return View(dt);
         }
+
         [HttpGet]
         public IActionResult UpdateBoard(int num) {
 
@@ -214,7 +219,6 @@ namespace BOARD_ASP_CORE.Controllers {
 
                 DateTime nowDate = DateTime.Now.Date;
 
-                //string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
                 using (SqlConnection con = new SqlConnection(conquery)) {
                     if (con.State == ConnectionState.Closed) {
                         con.Open();

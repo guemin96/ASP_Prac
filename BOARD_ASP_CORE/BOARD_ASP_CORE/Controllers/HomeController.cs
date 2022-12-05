@@ -20,7 +20,7 @@ namespace BOARD_ASP_CORE.Controllers {
         public IDbConnection dbConnection { get;}
 
 
-
+        //appsettings.json 파일에서 관리하는 DB정보 가지고 오기 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration) {
             _logger = logger;
             this.configuration = configuration;
@@ -59,6 +59,7 @@ namespace BOARD_ASP_CORE.Controllers {
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 
+                //Login시 세션 저장
                 if (dt.Rows.Count!=0) {
                     HttpContext.Session.SetInt32("USER_LOGIN_KEY", Int32.Parse(dt.Rows[0]["Num"].ToString()) );
 
@@ -69,6 +70,7 @@ namespace BOARD_ASP_CORE.Controllers {
         }
         public IActionResult Logout()
         {
+            //세션에 저장된 로그인 정보 삭제하기
             HttpContext.Session.Remove("USER_LOGIN_KEY");
             return RedirectToAction("Index", "Home");
         }

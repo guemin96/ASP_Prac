@@ -16,7 +16,7 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">게시판글 상세보기</h1>
             <div class="card mb-4">
-                < class="card-body">
+                <div class="card-body">
                     <div class="mb-3 mt-3">
                         <label>작성자 :</label>
                         <input type="text" class="form-control" value="@dtDetail.Rows[0]["Name"]"/>
@@ -66,11 +66,17 @@
                         <label>작성일 : </label>
                         <input type="text" class="form-control" value="@dtDetail.Rows[0]["PostDate"]" />
                     </div>
-                    @if (dtDetail.Rows[0]["UserId"].ToString() == Context.Session.GetInt32("USER_LOGIN_KEY").ToString()) {
-                        <a class="btn btn-primary" href="@Url.Action("UpdateBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">수정</a>
-                        <a class="btn btn-danger" href="@Url.Action("DeleteBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">삭제</a>
-                    }
-                    <a class="btn btn-success" href="@Url.Action("BoardList","Board",new{page = 1})">목록</a>
+                    <div class="mb-3">
+
+                    
+
+                        @if (dtDetail.Rows[0]["UserId"].ToString() == Context.Session.GetInt32("USER_LOGIN_KEY").ToString())
+                        {
+                            <a class="btn btn-primary" href="@Url.Action("UpdateBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">수정</a>
+                            <a class="btn btn-danger" href="@Url.Action("DeleteBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">삭제</a>
+                        }
+                        <a class="btn btn-success" href="@Url.Action("BoardList","Board",new{page = 1})">목록</a>
+                    </div>
                 </div>
             </div>
         </div>
