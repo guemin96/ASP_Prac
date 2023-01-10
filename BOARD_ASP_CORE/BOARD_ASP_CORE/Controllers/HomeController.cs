@@ -20,7 +20,6 @@ namespace BOARD_ASP_CORE.Controllers {
             _logger = logger;
         }
 
-
         public IActionResult Index() {
 
             return View();
@@ -29,6 +28,7 @@ namespace BOARD_ASP_CORE.Controllers {
         public IActionResult Privacy() {
             return View();
         }
+
         [HttpGet]
         public IActionResult Login() {
             return View();
@@ -102,8 +102,6 @@ namespace BOARD_ASP_CORE.Controllers {
                 return View();
             }
         }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
