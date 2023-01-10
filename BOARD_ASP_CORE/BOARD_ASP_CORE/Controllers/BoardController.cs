@@ -1,16 +1,36 @@
-﻿using BOARD_ASP_CORE.Models;
+﻿using BOARD_ASP_CORE.DataContext;
+using BOARD_ASP_CORE.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Reflection.Metadata;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace BOARD_ASP_CORE.Controllers {
     public class BoardController : Controller {
-        string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+        //string conquery = string.Empty;//"Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+
+        private readonly IConfiguration configuration; 
+        private IDbConnection dbConnection { get; }
+        string conquery = string.Empty;
+
+
+        public BoardController(IConfiguration configuration) {
+            this.configuration = configuration;
+            dbConnection = new SqlConnection(this.configuration.GetConnectionString("ConnectionString"));   
+            conquery = dbConnection.ConnectionString;
+        }
+
+        
         public IActionResult Index() {
             return View();
         }
@@ -20,6 +40,7 @@ namespace BOARD_ASP_CORE.Controllers {
             int totalCount = 0;
             DataSet ds = new DataSet();
 
+            #region 페이징 설정
 
             using (SqlConnection con = new SqlConnection(conquery)) {
                 if (con.State == System.Data.ConnectionState.Closed) {
@@ -73,7 +94,7 @@ namespace BOARD_ASP_CORE.Controllers {
                 ds.Tables.Add(dt);
                 con.Close();
             }
-
+            #endregion
             return View(ds);
         }
         [HttpGet]
@@ -92,12 +113,32 @@ namespace BOARD_ASP_CORE.Controllers {
 
                 DateTime nowDate = DateTime.Now.Date;
 
+                #region file 저장
+                List<string> filenames = new List<string>();
+                try {
+                    string wwwPath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images");
+
+                    foreach (IFormFile item in model.uploadFile) {
+                        string fileName = Path.GetFileName(item.FileName);
+                        using (FileStream stream = new FileStream(Path.Combine(wwwPath,item.FileName),FileMode.Create)) {
+                            item.CopyTo(stream);
+                            filenames.Add(fileName);
+
+                        }
+                    }
+                }
+                catch (Exception ex) {
+
+                    throw;
+                }
+                #endregion
+
                 //string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
                 using (SqlConnection con = new SqlConnection(conquery)) {
                     if (con.State == System.Data.ConnectionState.Closed) {
                         con.Open();
                     }
-                    string conquery = "insert into TB_Notes (UserId,Name,Title,PostDate,Content,ReadCount) values (@IUserId,@vcName,@vcTitle,@dtPostDate,@txContent,@iReadCount)";
+                    string conquery = "insert into TB_Notes (UserId,Name,Title,PostDate,Content,ReadCount,FileName) values (@IUserId,@vcName,@vcTitle,@dtPostDate,@txContent,@iReadCount,@vcFileNames)";
                     SqlCommand cmd = new SqlCommand(conquery, con);
                     cmd.Parameters.Add("@IUserId", SqlDbType.Int).Value = HttpContext.Session.GetInt32("USER_LOGIN_KEY").Value;
                     cmd.Parameters.Add("@vcName", SqlDbType.NVarChar).Value = model.Name;
@@ -105,6 +146,15 @@ namespace BOARD_ASP_CORE.Controllers {
                     cmd.Parameters.Add("@dtPostDate", SqlDbType.DateTime).Value = nowDate;
                     cmd.Parameters.Add("@txContent", SqlDbType.Text).Value = model.Content;
                     cmd.Parameters.Add("@iReadCount", SqlDbType.Int).Value = 0;
+                    string strfilenames = filenames[0];
+
+                    for (int i = 1; i < filenames.Count; i++) {
+                        strfilenames = filenames[i]+"*"+strfilenames;
+                    }
+                    //foreach (var item in filenames) {
+                    //    strfilenames = item + "*" + strfilenames;  
+                    //}
+                    cmd.Parameters.Add("@vcFileNames",SqlDbType.NVarChar).Value = strfilenames;
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
 
@@ -141,6 +191,7 @@ namespace BOARD_ASP_CORE.Controllers {
 
             return View(dt);
         }
+
         [HttpGet]
         public IActionResult UpdateBoard(int num) {
 
@@ -168,7 +219,6 @@ namespace BOARD_ASP_CORE.Controllers {
 
                 DateTime nowDate = DateTime.Now.Date;
 
-                //string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
                 using (SqlConnection con = new SqlConnection(conquery)) {
                     if (con.State == ConnectionState.Closed) {
                         con.Open();
@@ -202,8 +252,14 @@ namespace BOARD_ASP_CORE.Controllers {
                 con.Close();
 
             }
-
             return RedirectToAction("BoardList", "Board");
+        }
+
+        public FileResult FileDownload(string filename) {
+            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+ "\\" + filename;
+            byte[] bytes = System.IO.File.ReadAllBytes(filepath);
+
+            return File(bytes,"application/octet-stream",filename);
         }
     }
 }

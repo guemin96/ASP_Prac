@@ -13,11 +13,11 @@
 
     List<int> Chk1_F = new List<int> { 1, 10, 18, 25, 35, 39 };
 
-    const int ItemSeqNum = 1;
-    const int Input_1_Num = 7;
-    const int Input_2_Num = 8;
-    const int Input_3_Num = 9;
-    const int ComfirmUser_Num = 10;
+    const int ItemSeqNum = 1;                   //HW_ServerCheck_DatTemplate : ItemSeq 컬럼번호
+    const int Input_1_Num = 7;                  //HW_ServerCheck_DatData : 체크박스 1번 컬럼번호
+    const int Input_2_Num = 8;                  //HW_ServerCheck_DatData : 체크박스 2번 컬럼번호
+    const int Input_3_Num = 9;                  //HW_ServerCheck_DatData : 체크박스 3번 컬럼번호
+    const int ComfirmUser_Num = 10;             //HW_ServerCheck_DatData : 확인자 컬럼번호
     
     
 
@@ -65,17 +65,8 @@
             text-align:center;
         }
     </style>
-    @*<script>
-        window.history.forward(); 
-        
-        function noBack() {
-            window.history.forward();
-        }
-    </script>*@
 </head>
 <body>
-
-    @*onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">*@    @*뒤로가기 방지*@
     <div style="display:inline">
         <div >
            
@@ -88,12 +79,9 @@
                     <input type="text" id="datepicker" name="date" value="@ViewBag.Date" autocomplete="off" style="font-size:18px; " />
                     <input type="submit" value="조회" style="font-size:15px;" />
                 </div>
-                
             </form>
         </div>
-    
     </div>
-    
 
     <script src="pikaday.js"></script>
     <script>
@@ -158,13 +146,26 @@
                         }
                         <td style="text-align:center">@TempDr["ItemSeq"]</td>
                         <td style="text-align:left">@TempDr["CheckBody"]</td>
-                        @foreach (var DL in DataList) {
-                            <td style="text-align:center">
-                                @DL[Input_1_Num]'℃
-                                /
-                                @DL[Input_2_Num]%
-                            </td>
+                        @if (TempDr["ItemSeq"].ToString()=="8")
+                        {
+                            @foreach (var DL in DataList) {
+                                <td style="text-align:center">
+                                    @DL[Input_1_Num]'℃
+                                    /
+                                    @DL[Input_2_Num]'℃
+                                </td>
+                            }
                         }
+                        else {
+                            @foreach (var DL in DataList) {
+                                <td style="text-align:center">
+                                    @DL[Input_1_Num]'℃
+                                    /
+                                    @DL[Input_2_Num]%
+                                </td>
+                            }
+                        }
+                        
                     </tr>
                 }
                 else if (TempDr["CheckTypeID"].ToString().Equals("3")) {
@@ -259,13 +260,8 @@
                         @foreach (var DL in DataList) {
                             <td class="text-align-center">
                                 @(
-                                    DL[Input_1_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" }))
-                                @*@if (DL[Input_1_Num].Equals("True")) {
-                                        <label class="chk_label"></label>
-                                }
-                                else {
-                                        <label class="chkNone_label"></label>
-                                }*@
+                                    DL[Input_1_Num].Equals("True") ? Html.Label("", "", new { @class = "chk_label" }) : Html.Label("", "", new { @class = "chkNone_label" })
+                                 )
                             </td>
                         }
                     </tr>

@@ -6,7 +6,44 @@
 }
 
 <head>
+    <style>
+        #dragDropArea {
+            background-color: #f4f4f4;
+            margin: 10px;
+            padding: 10px;
+            border: #ddd solid 2px;
+            min-height: 200px;
+            text-align: center;
+            border-radius: 5px;
+        }
 
+            #dragDropArea p {
+                color: #999;
+                font-weight: bold;
+                font-size: 14px;
+                font-size: 1.4em;
+            }
+
+            #dragDropArea .drag-drop-buttons {
+                margin-top: 20px;
+                font-size: 12px;
+                font-size: 1.2em;
+            }
+
+        .drag-drop-buttons input {
+            margin: auto;
+        }
+
+        .fileInputButton {
+            color: white;
+            background-color: lightgray;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #999;
+        }
+    </style>
+    <script src="~/js/fileUpload_JS.js"></script>
 </head>
 <body>
     <div class="mt-5 pt-5">
@@ -26,9 +63,10 @@
                         <div class="mb-3 mt-3">
                             <label class="col-form-label">내용</label>
                             <textarea class="form-control editor" rows="20" id="Content" name="Content" placeholder="본문 내용"></textarea>
-                            @*<input type="text" class="form-control editor" style="height:300px;margin-top:5px;" id="content" name="content" placeholder="본문 내용" />*@
                         </div>
-                        
+                        <div class="mb-3 mt-3 custom-file">
+                           <input type="file" class="custom-file-input" size="15" name="uploadFile" multiple/>
+                        </div>
                         <div class="class=" mb-3 mt-3">
                             <button type="submit" class="btn btn-primary mb-0">저장</button>
                             <a class="btn btn-success" href="@Url.Action("BoardList","Board")">목록</a>
@@ -36,7 +74,31 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </body>
+@*<script>
+    $(function () {
+        $("#uploadButton").click(function () {
+            if ($("#uploadFile").val() === "") {
+                alert("File is empty.");
+                return;
+            }
+            var formData = new FormData();
+            $.each(document.querySelector("#uploadFile").files, function (i, item) {
+                formData.append("files", item);
+            });
+            $.ajax({
+                type: "POST",
+                url: "Home/UploadFiles",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data === "Success") $("#uploadFile").val("");
+                    else alert(data);
+                }
+            })
+        });
+    });
+</script>*@

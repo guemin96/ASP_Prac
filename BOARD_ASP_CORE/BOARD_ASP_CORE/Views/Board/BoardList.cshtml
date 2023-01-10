@@ -68,26 +68,36 @@
     
     <div class="out" >
         <div class="in">
-            <div>
+            <div class="pagination">
                 @if (startPage > 1) {
-                    <a href="?page=1" class="btn">[처음 페이지]</a>
+                    <div class="page-item">
+                        <a href="?page=1" class="page-link">처음 페이지</a>
+                    </div>
                 }
                 @if (page > 1) {
-                    <a href="?page=@(page-1)" class="btn">[이전 페이지]</a>
+                    <div class="page-item">
+                        <a href="?page=@(page-1)" class="page-link">이전 페이지</a>
+                    </div>
                 }
                 @for (int icount = startPage; icount <= endPage; icount++) {
-                    if (icount == page) {
-                        <a href="?page=@icount" class="btn" style="color:red;">@icount</a>
-                    }
-                    else {
-                        <a href="?page=@icount" class="btn">@icount</a>
-                    }
+                    <div class="page-item">
+                        @if (icount == page) {
+                            <a href="?page=@icount" class="page-link active" style="color:red;">@icount</a>
+                        }
+                        else {
+                            <a href="?page=@icount" class="page-link">@icount</a>
+                        }
+                    </div>
                 }
                 @if (page < totalPage) {
-                    <a href="?page=@(page+1)" class="btn">[다음 페이지]</a>
+                    <div class="page-item">
+                        <a href="?page=@(page+1)" class="page-link">다음 페이지</a>
+                    </div>
                 }
                 @if (endPage < totalPage) {
-                    <a href="?page=@totalPage" class="btn">[마지막 페이지]</a>
+                    <div class="page-item">
+                        <a href="?page=@totalPage" class="page-link">마지막 페이지</a>
+                    </div>
                 }
             </div>
         </div>

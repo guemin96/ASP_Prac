@@ -13,11 +13,19 @@ namespace BOARD_ASP_CORE.Controllers {
     public class HomeController : Controller {
         private readonly ILogger<HomeController> _logger;
         private SqlConnection con;
-        string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+        //string conquery = "Data Source=localhost;Initial Catalog=DotNetNote;User ID=sa;Password=1234";
+        string conquery = string.Empty;
+
+        private readonly IConfiguration configuration;
+        public IDbConnection dbConnection { get;}
 
 
-        public HomeController(ILogger<HomeController> logger) {
+        //appsettings.json 파일에서 관리하는 DB정보 가지고 오기 
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration) {
             _logger = logger;
+            this.configuration = configuration;
+            this.dbConnection = new SqlConnection(this.configuration.GetConnectionString("ConnectionString"));
+            conquery = dbConnection.ConnectionString;
         }
 
         public IActionResult Index() {
@@ -51,6 +59,7 @@ namespace BOARD_ASP_CORE.Controllers {
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 
+                //Login시 세션 저장
                 if (dt.Rows.Count!=0) {
                     HttpContext.Session.SetInt32("USER_LOGIN_KEY", Int32.Parse(dt.Rows[0]["Num"].ToString()) );
 
@@ -61,6 +70,7 @@ namespace BOARD_ASP_CORE.Controllers {
         }
         public IActionResult Logout()
         {
+            //세션에 저장된 로그인 정보 삭제하기
             HttpContext.Session.Remove("USER_LOGIN_KEY");
             return RedirectToAction("Index", "Home");
         }

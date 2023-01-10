@@ -1,6 +1,8 @@
+using BOARD_ASP_CORE.DataContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,10 +21,9 @@ namespace BOARD_ASP_CORE {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddSession();
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSession();                                      //세션을 통해 로그인 정보 저장
+            services.AddSingleton<IConfiguration>(Configuration);       //DB데이터 저장
             services.AddControllersWithViews();
-            
 
         }
 

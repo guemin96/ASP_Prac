@@ -12,12 +12,8 @@ namespace Hello.MVC6.Controllers {
     public class HomeController : Controller {
 
         private readonly UserBll _userBll;
-        public HomeController(UserBll userBll) {
-            _userBll = userBll;
-        }
 
         public IActionResult Index() {
-            var userList = _userBll.GetUserList();
 
             return View();
         }

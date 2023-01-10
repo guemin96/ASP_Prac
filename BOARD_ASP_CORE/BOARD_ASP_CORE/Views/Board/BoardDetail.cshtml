@@ -3,8 +3,10 @@
 *@
 @using System.Data;
 @using Microsoft.AspNetCore.Http
+@using System.IO
 @{
     DataTable dtDetail = Model;
+    string fileUrl = string.Empty; 
 }
 <head>
 
@@ -24,6 +26,36 @@
                         <input type="text" class="form-control" value="@dtDetail.Rows[0]["Title"]" />
                     </div>
                     <div class="mb-3">
+                        <div class="accordion" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <i class="fa-solid fa-floppy-disk"></i>첨부파일
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion_content">
+                                        <div style="width:50%;">
+                                            <ul>
+                                                    @if (dtDetail.Rows[0]["FileName"] != null) {
+                                                        string[] filenames = dtDetail.Rows[0]["FileName"].ToString().Split("*");
+                                                        @foreach (string item in filenames) {
+                                                        <li>
+                                                                @{
+                                                                    fileUrl = "C:\\ASP_Prac\\BOARD_ASP_CORE\\BOARD_ASP_CORE\\wwwroot\\images\\" + @item.ToString();
+                                                                }
+                                                            <a onclick="location.href = '/Board/FileDownload?filename=@item'" href="@fileUrl">@item</a>
+                                                        </li>
+                                                        }
+                                                    }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label>내용 : </label> 
                         <div class="form-control">
                             @Html.Raw(dtDetail.Rows[0]["Content"])
@@ -34,11 +66,17 @@
                         <label>작성일 : </label>
                         <input type="text" class="form-control" value="@dtDetail.Rows[0]["PostDate"]" />
                     </div>
-                    @if (dtDetail.Rows[0]["UserId"].ToString() == Context.Session.GetInt32("USER_LOGIN_KEY").ToString()) {
-                        <a class="btn btn-primary" href="@Url.Action("UpdateBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">수정</a>
-                        <a class="btn btn-danger" href="@Url.Action("DeleteBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">삭제</a>
-                    }
-                    <a class="btn btn-success" href="@Url.Action("BoardList","Board",new{page = 1})">목록</a>
+                    <div class="mb-3">
+
+                    
+
+                        @if (dtDetail.Rows[0]["UserId"].ToString() == Context.Session.GetInt32("USER_LOGIN_KEY").ToString())
+                        {
+                            <a class="btn btn-primary" href="@Url.Action("UpdateBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">수정</a>
+                            <a class="btn btn-danger" href="@Url.Action("DeleteBoard","Board",new{num = dtDetail.Rows[0]["Id"]})">삭제</a>
+                        }
+                        <a class="btn btn-success" href="@Url.Action("BoardList","Board",new{page = 1})">목록</a>
+                    </div>
                 </div>
             </div>
         </div>
