@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex Layout</title>
+  <style>
+    .parent{
+      border: 5px solid #000;
+      width: 1200px;
+      display: flex;
+      flex-direction: column-reverse;
+      /* row -> 가로 배치, row-reverse -> 가로 반대 배치
+       column -> 세로 배치 column-reverse -> 세로 반대 배치*/
+    }
+    .child{
+      border: 3px solid red;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    1) 가로 배치 하기
+    2) 가로 배치된 요소 너비값 지정하기
+    3) 수평 정렬하기, 수직 정렬하기
+    4) 배치 방향 지정하기(가로 배치, 새로 배치)
+   -->
+   <div class="parent">
+    <div class="child">child 1</div>
+    <div class="child">child 2</div>
+    <div class="child">child 3</div>
+   </div>
+
+</body>
+</html>

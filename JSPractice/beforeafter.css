@@ -1,0 +1,6 @@
+* {padding: 0; margin: 0; list-style:none;text-decoration : none;}
+body{padding:50px;}
+ul{counter-reset: li;}
+ul li:before{content:"하이" counter(li) "--"; counter-increment: li;}
+
+div::after{content: "ddd";}

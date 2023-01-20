@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex Layout</title>
+  <style>
+    .parent{
+      border: 5px solid #000;
+      width: 1200px;
+      height: 600px;
+      display: flex;
+      align-items: flex-start;/* 
+      flex의 속성이므로 flex가 반드시 설정되어있어야 한다 
+      수직정렬 속성 
+      flex-start:상단정렬
+      center : 중앙
+      flex-end:하단정렬*/
+    }
+    .child{
+      border: 3px solid red;
+      width: 400px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    1) 가로 배치 하기
+    2) 가로 배치된 요소 너비값 지정하기
+    3) 수평 정렬하기, 수직 정렬하기
+    4) 배치 방향 지정하기(가로 배치, 새로 배치)
+   -->
+   <div class="parent">
+    <div class="child">child 1</div>
+   </div>
+
+</body>
+</html>

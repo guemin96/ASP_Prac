@@ -1,0 +1,31 @@
+<!-- CSS 중앙 정렬
+1. 자기 자신이 중앙으로 갈 경우
+ position, margin: auto
+
+2. 부모 요소가 자식요소를 중앙으로 보낼 경우
+flex, grid, place-items,  
+------------------------------------
+
+ 2. 수평 중앙 정렬할 때 블록요소 vs 인라인(인라인 블록)
+ 블록요소는 자기 자신에 margin: auto; <- 블록요소에만 적용
+ 인라인(인라인블록)은 부모요소 또는 사위요소에 text-align: center;
+ -------------------------------------------------------------
+
+ 3. 자기 자신과 인접해 있는 요소와 수직 중앙을 맞출 경우
+ vertical-align: 값; transform: translateY(값);  <- inline요소는 이 속성을 가지지 못함
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div>
+        <img src="./images/pngwing.com.png"><span>어깨가 뻐근하네요</span></img>
+    </div>
+</body>
+</html>

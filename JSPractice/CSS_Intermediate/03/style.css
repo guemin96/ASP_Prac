@@ -1,0 +1,53 @@
+.element{
+  border: 5px solid #000;
+  background-color: skyblue;
+  color: #fff;
+  height: 200px;
+
+  /* position */
+  /*  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  */
+  /* margin */
+  /*margin: auto;*/
+
+
+
+}
+/* Flex,Grid의 경우에는 부모요소인 body에다 값을 줘야 자식요소가 중앙으로 가게 된다 */
+
+body{
+  height: 100vh;
+  /* Flex */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  
+  /* Grid */
+  /*  display: grid;
+  justify-content: center;
+  align-items: center;*/
+
+  /* place-item */
+  /*display: grid;
+  place-items: center; */
+}
+.element span{
+  border: 5px solid red;
+  /*  margin: auto;
+  width: 50%;*/
+  /* display: block; */
+  float: left;
+}
+
+div img{
+  /* vertical-align: middle; */
+  vertical-align: middle;
+  transform: translateY();
+}
+div span{
+  font-size: 14px;
+ 
+}

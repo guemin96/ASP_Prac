@@ -1,0 +1,25 @@
+#back-to-top{
+  position: fixed;  /* 우측하단에 고정하기 위함 */
+  bottom: 3em;
+  right: 3em;
+  opacity: 0;      /* 안보이게 설정해놓음 */
+  background-color: rgba(25,255,255,.9);
+  color: #313943;
+  border: none;
+  border-radius:5px;;
+  padding:1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight:700;
+  box-shadow:0 0 2em 0 rgba(0,0,0,.25);
+  transition: all .3s ease-in-out;
+  display: inline-block;
+  
+}
+#back-to-top:hover{
+  background-color: #fff;
+  padding:1em 3em;
+}
+#back-to-top.visible{
+  opacity: 1;
+}
